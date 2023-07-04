@@ -2,26 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+*, html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer components{
+  li{
+    @apply line-clamp-none
   }
+  .container{
+    @apply max-w-7xl mx-auto 
+  }
+  .button{
+    @apply relative bg-secoundary text-primary uppercase transition duration-100 rounded overflow-hidden  }
+  .button:hover{
+    @apply bg-secoundary shadow-3xl shadow-secoundary
+  }
+  .button::before{
+    @apply content-[''] z-0 absolute inset-[2px] bg-primary
+  }
+  .button span{
+    @apply relative  z-10 text-white
+  }
+  .button i{
+    @apply absolute inset-0 block
+  }
+  .button i::before{
+    @apply content-[''] absolute top-0 left-[80%] w-[10px] h-[4px] bg-primary translate-x-[-50%] skew-x-[325deg] transition-all duration-150
+  }
+  .button:hover i::before{
+   @apply w-[20px] left-[20%]
+  }
+
+  .button i::after{
+    @apply content-[''] absolute bottom-0 left-[20%] w-[10px] h-[4px] bg-primary translate-x-[-50%] skew-x-[325deg] transition-all duration-150
+  }
+  .button:hover i::after{
+   @apply w-[20px] left-[80%]
+  }
+
+
+  header{
+    @apply fixed top-0 left-0 w-full py-2 bg-[transparent] z-50
+  }
+
+  .navLink{
+    @apply text-white hover:text-secoundary transition-colors duration-75
+  }
+ .navLink.active{
+    @apply text-secoundary
+  }
+ 
+
+ 
+
+  .dropdown_menu{
+    @apply absolute md:hidden right-0 top-[60px] w-full bg-[blue]/80 overflow-hidden rounded
+  }
+  .dropdown_menu li{
+    @apply p-1 flex items-center justify-center
+  }
+  .dropdown_menu .button{
+    @apply w-full flex justify-center
+  }
+
+  .backgroundIntro{
+    @apply relative
+  }
+  .backgroundIntro::before{
+    @apply absolute top-0 left-0 w-full h-full bg-[black]/75 -z-10 content-['']
+  }
+ 
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
+
