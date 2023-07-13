@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineMessage } from "react-icons/ai";
 import { motion } from "framer-motion";
-import ReactAudioPlayer from "react-audio-player";
 import { LiaAngleDownSolid } from "react-icons/lia";
 import MessangerForm from "./messangerForm";
 import MmyMessage from "./myMessage";
@@ -53,7 +52,7 @@ const Messanger = (props: Props) => {
         <MessageHeader />
         <div className="w-full h-[350px] md:h-[400px] mb-10  bg-[#c7c7ca] overflow-y-auto overflow-x-hidden flex flex-col space-y-3 p-3 py-5">
           <MmyMessage />
-          {/* <ClientMessage /> */}
+          <ClientMessage />
          
         </div>
 
