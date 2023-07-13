@@ -6,12 +6,28 @@
   scroll-behavior: smooth;
 }
 
+
 @layer components{
+
+  ::-webkit-scrollbar{
+    @apply w-1.5 rounded-full
+  }
+  ::-webkit-scrollbar-track{
+    @apply bg-[#d1e5ff] rounded-full
+  }
+
+  ::-webkit-scrollbar-thumb{
+    @apply bg-secoundary rounded-full
+  }
+ 
   li{
     @apply line-clamp-none
   }
   .container{
-    @apply max-w-7xl mx-auto 
+    @apply max-w-7xl mx-auto px-1 md:px-5 lg:px-1 
+  }
+  .section-padding{
+    @apply pt-32
   }
   .button{
     @apply relative bg-secoundary text-primary uppercase transition duration-100 rounded overflow-hidden  }
@@ -47,12 +63,18 @@
   }
 
   .navLink{
-    @apply text-white hover:text-secoundary transition-colors duration-75
+    @apply text-white hover:text-secoundary transition-colors duration-75 cursor-pointer
   }
  .navLink.active{
     @apply text-secoundary
   }
  
+  .menuNavLink{
+    @apply text-white border border-primary block p-1 bg-secoundary
+  }
+  .menuNavLink.active{
+    @apply text-primary
+  }
 
  
 
@@ -71,6 +93,39 @@
   }
   .backgroundIntro::before{
     @apply absolute top-0 left-0 w-full h-full bg-[black]/75 -z-10 content-['']
+  }
+
+  .title{
+    @apply text-3xl md:text-5xl font-medium  text-white leading-[40px] md:leading-[70px] text-left
+  }
+  .sub-title{
+    @apply text-2xl md:text-4xl font-medium  text-white leading-[35px]  md:leading-[40px] text-left
+  }
+
+
+  .skills-bar .bar{
+    @apply my-5 mx-0
+  }
+
+  .skills-bar .bar .info{
+    @apply mb-2 text-white
+  }
+ 
+  .skills-bar .bar:first-child{
+    @apply mt-0
+  }
+
+  .skills-bar .bar .progress-line{
+    @apply h-3 w-full bg-[white] shadow-sm relative rounded
+  }
+  .skills-bar .bar .progress-line span{
+    @apply h-full  bg-secoundary absolute rounded
+  }
+  .skills-bar .bar .progress-line span::before{
+    @apply absolute content-[""] right-0 -top-2 h-0 w-0 border-4 border-solid border-[transparent]  border-t-secoundary
+  }
+  .skills-bar .bar .progress-line span::after{
+    @apply absolute right-0 -top-7 bg-primary text-xs text-white px-1 py-[2px] rounded 
   }
  
 }

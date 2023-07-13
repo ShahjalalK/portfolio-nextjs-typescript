@@ -14,14 +14,14 @@ module.exports = {
     extend: { 
       fontFamily : {
         Noto: ['Noto Sans Mono', 'monospace'],
+        Roboto : ['Roboto', 'sans-serif']
       },
       boxShadow : {
-        "3xl" : "0 0 16px"
+        "3xl" : "0 0 16px",
+        "2xl" : "0 0 8px",
       },    
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        circlarLight : 'repeating-radial-gradient(#14C2A3 2px, transparent 5px, transparent 100px)'
       },
     },
 

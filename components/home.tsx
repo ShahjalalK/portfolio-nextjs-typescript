@@ -1,18 +1,18 @@
 import React from 'react'
 import {AiOutlineHome} from 'react-icons/ai'
-import TitleAnimate from './titleAnimate'
+import {motion} from 'framer-motion'
 
 type Props = {}
 
 const Home = (props: Props) => {
   return (
     
-        <section id="home" className="h-screen pt-32 snap-mandatory snap-y snap-center overflow-y-auto">
-             <span className="rounded-full mb-10 border border-white/50 text-white/50 px-3 py-1 text-sm inline-flex items-center space-x-1"><AiOutlineHome className="text-lg" /> <span className="text-sm">INTRODUCE</span></span>
-             <TitleAnimate text='Say Hi from Drake, Webflow Designer and Developer' className="text-5xl font-medium  text-white leading-[70px] text-left" />
+        <motion.section id="home" initial={{opacity : 1}} whileInView={{opacity : 1}} transition={{delay : 0.5, staggerChildren : 0.08}} className=" section-padding">
+             <motion.span initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}}  className="rounded-full mb-10 border border-white/50 text-white/50 px-3 py-1 text-sm inline-flex items-center space-x-1"><AiOutlineHome className="text-lg text-secoundary/75" /> <span className="text-sm">INTRODUCE</span></motion.span>
+             <motion.h1 initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}} className="title" >Say Hi from <span className="text-secoundary">Shahjalal</span>, Webflow Designer and Developer</motion.h1>
            
-            <p className="text-white/80 mt-5 md:mr-32 leading-[32px]">I design and code beautifully simple things and i love what i do. Just simple like that!</p>
-        </section>
+            <motion.p initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}} className="text-white/80 mt-5 md:mr-32 leading-[32px]">I design and code beautifully simple things and i love what i do. Just simple like that!</motion.p>
+        </motion.section>
   )
 }
 

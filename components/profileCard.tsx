@@ -4,6 +4,7 @@ import React from 'react'
 import { BsTwitter, BsGithub, BsFacebook} from 'react-icons/bs'
 import {FaLinkedinIn} from 'react-icons/fa'
 import {HiOutlineMail} from 'react-icons/hi'
+import { Typewriter } from 'react-simple-typewriter'
 
 type Props = {}
 
@@ -12,12 +13,23 @@ const ProfileCard = (props: Props) => {
     <div className="border border-white/75 rounded-2xl p-5 ">
         <div className="flex items-center justify-between">
             <h1 className="text-2xl text-white font-bold">Shahjalal</h1>
-            <p className="text-white text-sm">Farmer Designer 
-               <br /> & Developer</p>
+            <p className="text-white text-sm"><span className="text-secoundary">
+            <Typewriter
+            words={['Web Designer', 'Web Developer']}
+            loop
+            cursor
+            cursorStyle='_'
+            typeSpeed={70}
+            deleteSpeed={50}
+            delaySpeed={5000}
+            
+          />
+              </span> 
+              </p>
         </div>
-        <Image src="/sk.jpg" alt='me' width={350} height={350} className=" rounded-3xl my-5 mx-auto w-60" />
+        <Image src="/profile2.webp" alt='me' width={350} height={350} className=" rounded-3xl my-5 mx-auto w-60" />
         <div className="text-white mt-5 justify-center flex flex-col text-center text-xl">
-            <h3 className="text-base"><Link href="mailto:shahjalalkhan895@gmail.com">shahjalalkhan895@gmail.com</Link></h3>
+            <h3 className="text-sm text-white/75"><Link href="mailto:shahjalalkhan895@gmail.com" className="">shahjalalkhan895@gmail.com</Link></h3>
             <h2 className="text-xl">Kushtia, Dhaka, Bangladesh</h2>
         </div>
         <div className="mt-5 flex justify-center items-center space-x-3">
