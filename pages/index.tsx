@@ -1,11 +1,21 @@
 import Hero from '@/components/hero'
+import { firestore } from '@/firebase.config'
+import MessageApi from '@/firebaseApi/messageApi'
+
 import Meta from '@/meta/meta'
-import React from 'react'
+import React, {useEffect} from 'react'
 
 
 type Props = {}
 
 const Home = (props: Props) => {
+  const {GetClientMessage} = MessageApi()
+
+
+useEffect(() => {
+  GetClientMessage()
+}, [firestore])
+
   return (
     <div>
       <Meta title='Home' /> 

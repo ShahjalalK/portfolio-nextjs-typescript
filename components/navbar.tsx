@@ -14,12 +14,16 @@ import {
 import { motion } from "framer-motion";
 import { AiOutlineClose } from "react-icons/ai";
 import { useRouter } from "next/router";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from "@/firebase.config";
+import { signOut } from "firebase/auth";
 
 type Props = {};
 
 const Navbar = (props: Props) => {
   const [showMenu, setShowMenu] = useState(false);
   const [shadowNave, setShadowNave] = useState(false);
+  const [user, loading, error] = useAuthState(auth);
 
   const router = useRouter();
 
@@ -37,7 +41,7 @@ const Navbar = (props: Props) => {
     });
   }, []);
 
-  console.log("RouterCheck", router.pathname);
+
 
   return (
     <header
@@ -175,6 +179,20 @@ const Navbar = (props: Props) => {
               </Links>
             )}
           </li>
+          {user?.email === "shahjalalkhan895@gmail.com" && 
+             <>
+              <li>
+              <Link href="/admin" className="navLink ">
+                   Message
+                  </Link>
+              </li>
+
+              <button onClick={() => signOut(auth)} className="navLink ">
+                   Logout
+                  </button>
+             </>
+          }
+          
         </motion.ul>
         <Link
           href="/"
@@ -314,6 +332,21 @@ const Navbar = (props: Props) => {
               </Links>
             )}
           </li>
+          {user?.email === "shahjalalkhan895@gmail.com" && 
+          <>
+          
+          <li>
+          <Link href="/admin" className="menuNavLink ">
+                Message
+              </Link>
+          </li>
+          <button onClick={() => signOut(auth)} className="navLink ">
+                   Logout
+                  </button>
+          </>
+          
+          }
+          
 
           <li>
             {" "}

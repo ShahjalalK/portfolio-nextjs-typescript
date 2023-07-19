@@ -63,7 +63,7 @@
   }
 
   .navLink{
-    @apply text-white hover:text-secoundary transition-colors duration-75 cursor-pointer
+    @apply text-white hover:text-secoundary transition-colors duration-75 cursor-pointer text-lg font-normal
   }
  .navLink.active{
     @apply text-secoundary

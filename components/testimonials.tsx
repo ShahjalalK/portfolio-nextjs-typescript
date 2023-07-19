@@ -78,7 +78,7 @@ const Testimonials = (props: Props) => {
   
   return (
     <motion.section
-      id="home"
+    
       initial={{ opacity: 1 }}
       whileInView={{ opacity: 1 }}
       transition={{ delay: 0.5, staggerChildren: 0.08 }}
