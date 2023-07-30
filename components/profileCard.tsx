@@ -29,7 +29,7 @@ const ProfileCard = (props: Props) => {
         </div>
         <Image src="/profile2.webp" alt='me' width={350} height={350} className=" rounded-3xl my-5 mx-auto w-60" />
         <div className="text-white mt-5 justify-center flex flex-col text-center text-xl">
-            <h3 className="text-sm text-white/75"><Link href="mailto:shahjalalkhan895@gmail.com" className="">shahjalalkhan895@gmail.com</Link></h3>
+            <h3 className="text-sm text-white/75"><Link href="mailto:shahjalalk.web@gmail.com" className="">shahjalalk.web@gmail.com</Link></h3>
             <h2 className="text-xl">Kushtia, Dhaka, Bangladesh</h2>
         </div>
         <div className="mt-5 flex justify-center items-center space-x-3">

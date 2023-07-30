@@ -4,10 +4,14 @@ import Standard from "./standard";
 import Premium from "./premium";
 import { useRecoilState } from "recoil";
 import { useTabState } from "@/atom/prichingTab";
+import { pricingNameType } from "@/atom/santyType";
 
-type Props = {};
 
-const Package = (props: Props) => {
+type Props = {
+  pricingInfo : pricingNameType[]
+};
+
+const Package = ({pricingInfo}: Props) => {
   const [tabState, setTabState] = useRecoilState(useTabState);
   return (
     <div className=" col-span-1">
@@ -33,9 +37,9 @@ const Package = (props: Props) => {
           </div>
         </div>
         <div className="border border-primary/50 border-t-0 p-5">
-          {tabState.view === "basic" && <Basic />}
-          {tabState.view === "standard" && <Standard />}
-          {tabState.view === "premium" && <Premium />}
+          {tabState.view === "basic" && <Basic pricingInfo={pricingInfo} />}
+          {tabState.view === "standard" && <Standard pricingInfo={pricingInfo} />}
+          {tabState.view === "premium" && <Premium pricingInfo={pricingInfo}/>}
         </div>
 
         <button className="border border-primary/75 w-full p-2 rounded-lg mt-5 font-bold text-primary/90 hover:bg-primary/60 hover:text-white hover:border-[transparent]">Contact me</button>

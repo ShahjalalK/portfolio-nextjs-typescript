@@ -182,8 +182,19 @@ const Navbar = (props: Props) => {
           {user?.email === "shahjalalkhan895@gmail.com" && 
              <>
               <li>
+              <Link href="/studio" className="navLink ">
+                   Studio
+                  </Link>
+              </li>
+              <li>
               <Link href="/admin" className="navLink ">
                    Message
+                  </Link>
+              </li>
+             
+              <li>
+              <Link href="/subscribe" className="navLink ">
+                   Subscribe
                   </Link>
               </li>
 
@@ -334,12 +345,25 @@ const Navbar = (props: Props) => {
           </li>
           {user?.email === "shahjalalkhan895@gmail.com" && 
           <>
+
+          <li>
+          <Link href="/studio" className="menuNavLink ">
+                Studio
+              </Link>
+          </li>
           
           <li>
           <Link href="/admin" className="menuNavLink ">
                 Message
               </Link>
           </li>
+
+          <li>
+          <Link href="/subscribe" className="menuNavLink ">
+                Subscribe
+              </Link>
+          </li>
+
           <button onClick={() => signOut(auth)} className="navLink ">
                    Logout
                   </button>

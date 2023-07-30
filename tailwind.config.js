@@ -9,7 +9,8 @@ module.exports = {
     colors : {
       "primary" : '#141A31',
       "secoundary" : '#14C2A3',
-      "white" : "#fff"
+      "white" : "#fff",
+      "thard" : "#04fc43"
     },
     extend: { 
       fontFamily : {
@@ -19,7 +20,9 @@ module.exports = {
       boxShadow : {
         "3xl" : "0 0 16px",
         "2xl" : "0 0 8px",
-      },    
+        "skillshadow" : "0 0 10px 0 0 30px"
+      },
+     
       backgroundImage: {
         circlarLight : 'repeating-radial-gradient(#14C2A3 2px, transparent 5px, transparent 100px)'
       },

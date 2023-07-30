@@ -9,10 +9,20 @@ import Link from "next/link";
 import GigSlider from "./gigSlider";
 import Description from "./description";
 import Lavel from "./lavel";
+import { MediaType } from "@/atom/serviceType";
+import { GigsType } from "@/atom/santyType";
 
-type Props = {};
 
-const Content = (props: Props) => {
+type Props = {
+  title: string,
+  Media : GigsType[],
+  description : any
+  
+};
+
+const Content = ({title, Media, description}: Props) => {
+  
+
   const slideRef = useRef<any>()
 
   const prevSlide = () => {
@@ -26,14 +36,14 @@ const Content = (props: Props) => {
   return (
     <div className="md:col-span-2 md:mr-16">
       <h1 className="text-3xl font-bold">
-        I will code clickable HTML email signature for outlook, gmail, and apple
+        {title}
       </h1>
       
 <Lavel />
 
 
       <div className="my-5 md:w-[90%] relative border border-primary/20">
-        <GigSlider slideRef={slideRef}/>
+        <GigSlider slideRef={slideRef} Media={Media} />
         <div className=" absolute top-[50%] -translate-y-[50%] z-20 flex items-center justify-between w-full">
             <button onClick={prevSlide} className="text-2xl bg-white rounded-full p-2 shadow-2xl shadow-primary/80 text-[#222] hover:text-secoundary transition-all duration-300 md:-ml-5"><AiOutlineLeft /></button>
             <button onClick={nextSlide} className="text-2xl bg-white rounded-full p-2 shadow-2xl shadow-primary/80 text-[#222] hover:text-secoundary transition-all duration-300 md:-mr-5"><AiOutlineRight /></button>
@@ -41,7 +51,7 @@ const Content = (props: Props) => {
       </div>
      
 
-      <Description />
+      <Description description={description} />
 
     </div>
   );

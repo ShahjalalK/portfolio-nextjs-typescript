@@ -12,12 +12,17 @@
   ::-webkit-scrollbar{
     @apply w-1.5 rounded-full
   }
+ 
   ::-webkit-scrollbar-track{
     @apply bg-[#d1e5ff] rounded-full
   }
 
   ::-webkit-scrollbar-thumb{
     @apply bg-secoundary rounded-full
+  }
+
+  body{
+    @apply overflow-x-hidden
   }
  
   li{
@@ -116,18 +121,77 @@
   }
 
   .skills-bar .bar .progress-line{
-    @apply h-3 w-full bg-[white] shadow-sm relative rounded
+    @apply h-2 w-full bg-[#777575] shadow-sm relative rounded
   }
   .skills-bar .bar .progress-line span{
-    @apply h-full  bg-secoundary absolute rounded
+    @apply h-full  bg-[var(--clr2)] absolute rounded
   }
+
   .skills-bar .bar .progress-line span::before{
     @apply absolute content-[""] right-0 -top-2 h-0 w-0 border-4 border-solid border-[transparent]  border-t-secoundary
   }
   .skills-bar .bar .progress-line span::after{
-    @apply absolute right-0 -top-7 bg-primary text-xs text-white px-1 py-[2px] rounded 
+    @apply absolute right-0 -top-7 bg-primary text-xs text-white px-1 py-[2px] rounded
   }
- 
+  .skills-bar .bar .progress-line span.NodeJS::after{
+    @apply content-["75%"]
+  }
+  .skills-bar .bar .progress-line span.Prisma::after{
+    @apply content-["55%"]
+  }
+  .skills-bar .bar .progress-line span.socket::after{
+    @apply content-["65%"]
+  }
+  
+
+  .skill-container{
+    @apply relative flex justify-center items-center flex-wrap gap-5
+  }
+  .skill-container .card{
+    @apply relative w-full h-full bg-[transparent]
+  }
+  .skill-container .card .percent{
+    @apply relative w-[150px] h-[150px] 
+  }
+
+  .skill-container .card .percent svg{
+    @apply relative w-[150px] h-[150px] rotate-[270deg]
+  }
+  .skill-container .card .percent svg circle{
+    @apply relative w-full h-full fill-[transparent] stroke-2 stroke-[#777575] translate-x-[5px] translate-y-[5px]
+  }
+  .skill-container .card .percent svg circle:nth-child(2){
+   @apply stroke-[var(--clr)]
+   }
+  .dot{
+    @apply absolute inset-[5px] z-10
+  }
+  .dot::before{
+    @apply content-[""] absolute w-[10px] h-[10px] bg-[var(--clr)] -top-[5px] left-[50%] -translate-x-[50%] z-10 rounded-full shadow-skillshadow shadow-[var(--clr)]
+  }
+
+  .skill-number{
+    @apply absolute inset-0 flex justify-center items-center flex-col
+  }
+  .skill-number h2{
+    @apply flex justify-center items-center text-white font-bold text-3xl
+  }
+  .skill-number h2 span{
+    @apply font-normal text-white text-lg
+  }
+  .skill-number p{
+    @apply font-normal text-sm uppercase text-white/75 mt-1
+  }
+
+  
 }
+
+.skill-container .card .percent svg circle:nth-child(2){
+ stroke-dasharray: 440;;
+}
+/* .dot{
+  transform: rotate(calc(3.6deg * var(--num)));
+} */
+
 
 

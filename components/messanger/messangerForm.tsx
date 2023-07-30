@@ -8,7 +8,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { BsEmojiSmile, BsFillEmojiSmileFill, BsFillSendFill } from 'react-icons/bs'
 import { RiAttachment2 } from 'react-icons/ri'
 import { useRecoilState} from 'recoil'
-import Emoji from './emoji'
+
 
 
 type Props = {  
@@ -17,7 +17,7 @@ type Props = {
 }
 
 const MessangerForm = ({showEmoji, setShowEmoji}: Props) => {
-  const {messageHandler} = MessageHandlerApi()
+  const {messageHandler, emailHandler} = MessageHandlerApi()
 
 
   const [messageState, setMessageState] = useRecoilState<messageContentType>(messageContentState)
@@ -74,6 +74,7 @@ const MessangerForm = ({showEmoji, setShowEmoji}: Props) => {
       e.preventDefault()
       messageHandler(setMessageHeight)
       setShowEmoji(false)
+      emailHandler()
  }
   
   return (

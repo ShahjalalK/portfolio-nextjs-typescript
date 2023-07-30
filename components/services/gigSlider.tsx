@@ -1,67 +1,54 @@
-import Image from 'next/image';
+import { GigsType } from "@/atom/santyType";
+import Image from "next/image";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
 type Props = {
-    slideRef : any
-}
+  slideRef: any;
+  Media: GigsType[];
+};
 
-const GigSlider = ({slideRef}: Props) => {
-    
+const GigSlider = ({ slideRef, Media }: Props) => {
   return (
     <Swiper
-        slidesPerView={1}
-        loop={true}
-        ref={slideRef as any}
-        >
-          <SwiperSlide>
-            <Image src="/signature-1.jpg"  alt="signature" width={750} height={750} className=" z-10"/>
-          </SwiperSlide>
+      slidesPerView={1}
+      loop={true}
+      ref={slideRef as any}
+      className=" max-h-[25rem] "
+    >
+      {Media.map((item) => (
+        <SwiperSlide key={item._id}>
+          {item.video && (
+            <div style={{ padding: "56.24% 0 0 0", position: "relative" }}>
+              <iframe
+                src={item.video}
+                frameBorder={0}                
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowFullScreen={true}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                }}
+                title="video"
+              />
+            </div>
+          )}
+          {item.mediaImage && (
+            <Image
+              src={item.mediaImage}
+              alt="signature"
+              width={750}
+              height={750}
+              className=" w-full h-full object-contain z-10"
+            />
+          )}
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  );
+};
 
-          <SwiperSlide>
-          <div style={{ padding: "56.24% 0 0 0", position: "relative" }}>
-  <iframe
-    src="https://player.vimeo.com/video/843646912?badge=0&autopause=0&player_id=0&app_id=58479"
-    frameBorder={0}
-    allow="autoplay; fullscreen; picture-in-picture"
-    allowFullScreen={true}
-    style={{
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%"
-    }}
-    title="video"
-  />
-</div>
-          </SwiperSlide>
-          
-
-          <SwiperSlide>
-            <Image src="/signature-2.jpg"  alt="signature" width={750} height={750} className=" z-10"/>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <Image src="/signature-4.webp"  alt="signature" width={750} height={750} className=" z-10"/>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <Image src="/signature-3.webp"  alt="signature" width={750} height={750} className=" z-10"/>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <Image src="/signature-5.webp"  alt="signature" width={750} height={750} className=" z-10"/>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <Image src="/signature-6.webp"  alt="signature" width={750} height={750} className=" z-10"/>
-          </SwiperSlide>
-
-
-          
-        </Swiper>
-  )
-}
-
-export default GigSlider
+export default GigSlider;

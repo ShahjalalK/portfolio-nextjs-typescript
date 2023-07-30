@@ -5,10 +5,15 @@ import { FaBezierCurve, FaFileSignature } from 'react-icons/fa'
 import Link from 'next/link'
 import { BsCodeSlash } from 'react-icons/bs'
 import { useRouter } from 'next/router'
+import { serviceSectionType } from '@/atom/santyType'
 
-type Props = {}
 
-const Services = (props: Props) => {
+type Props = {
+  serviceSectionData : serviceSectionType[]
+}
+
+const Services = ({serviceSectionData}: Props) => {
+  
   const router = useRouter()
   return (
     <motion.section initial={{opacity : 1}} whileInView={{opacity : 1}} transition={{delay : 0.5, staggerChildren : 0.08}} id="services" className="section-padding">
@@ -16,45 +21,24 @@ const Services = (props: Props) => {
     <motion.h1 initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}} className="sub-title" >
     My <span className="text-secoundary">Specializations</span>
    </motion.h1>
-  
-   <motion.div initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}} className=" mt-10 block group border border-white/30 hover:border-secoundary transition-all duration-100 ease-in-out rounded-2xl p-10 cursor-pointer">
-      <div className="flex items-start flex-grow">
-      <div className="flex-grow">
-        <h2 className="text-xl text-white">Website Design</h2>
-        <p className="text-white/50 text-sm mt-2">I created digital products with unique ideas use WIX</p>
-      </div>
-      <div className="text-3xl text-secoundary">
-        <FaBezierCurve />
-      </div>
-      </div>
-      <p className="text-white/75 group-hover:text-white text-xs mt-10 inline-block group-hover:underline" >40+ PROJECTS</p>
-    </motion.div>
 
-    <motion.div initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}} className=" mt-5 block group border border-white/30 hover:border-secoundary transition-all duration-100 ease-in-out rounded-2xl p-10 cursor-pointer">
+   {serviceSectionData.slice(0, 3).map((item) => (
+      <motion.div key={item._id} onClick={() => router.push(`/service/${item.ServicePath}`)} initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}} className=" mt-10 block group border border-white/30 hover:border-secoundary transition-all duration-100 ease-in-out rounded-2xl p-10 cursor-pointer">
       <div className="flex items-start flex-grow">
       <div className="flex-grow">
-      <h2 className="text-xl text-white">Development</h2>
-        <p className="text-white/50 text-sm mt-2">I build website go live with NextJS, Firebase and Sanity</p>
+        <h2 className="text-xl text-white">{item.serviceName}</h2>
+        <p className="text-white/50 text-sm mt-2">{item.serviceTitle}</p>
       </div>
       <div className="text-3xl text-secoundary">
-        <BsCodeSlash />
+        {item.icon === "FaFileSignature" && <FaFileSignature />}
+        {item.icon === "BsCodeSlash" && <BsCodeSlash />}
+        {item.icon === "FaBezierCurve" && <FaBezierCurve />}
+       
       </div>
       </div>
-      <p className="text-white/75 group-hover:text-white text-xs mt-10 inline-block group-hover:underline" >40+ PROJECTS</p>
+      <p className="text-white/75 group-hover:text-white text-xs mt-10 inline-block group-hover:underline" >{item.orderLenth}+ PROJECTS</p>
     </motion.div>
-
-    <motion.div onClick={() => router.push("/clickable-email-signature")} initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}} className=" mt-5 block group border border-white/30 hover:border-secoundary transition-all duration-100 ease-in-out rounded-2xl p-10 cursor-pointer">
-      <div className="flex items-start flex-grow">
-      <div className="flex-grow">
-        <h2 className="text-xl text-white">Clickable Html Email Signature</h2>
-        <p className="text-white/50 text-sm mt-2">I will design clickable HTML email signature for you</p>
-      </div>
-      <div className="text-3xl text-secoundary">
-        <FaFileSignature />
-      </div>
-      </div>
-      <p className="text-white/75 group-hover:text-white text-xs mt-10 inline-block group-hover:underline" >40+ PROJECTS</p>
-    </motion.div>
+   ))}
   
 </motion.section>
   )

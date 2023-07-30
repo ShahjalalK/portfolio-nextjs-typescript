@@ -29,15 +29,23 @@ const userCooke = cookie.user ? JSON.parse(cookie.user) : ""
 const [showEmoji, setShowEmoji] = useState<boolean>(false)
 
 
+
+const shwoFunc = async (showMessage : boolean) => {
+  const audio = new Audio()
+  audio.src = "/message.wav"
+  audio.autoplay = true
+  setShowMessage(true);
+   
+}
+
+
   useEffect(() => {
-    let messageOpen = setTimeout(() => {     
-        const audio = new Audio("/message.wav")
-       if(showMessage){
-        audio.pause()   
-       }else{
-        audio.play()   
-       }
-        setShowMessage(true);
+    let messageOpen = setTimeout(() => { 
+      if(showMessage === false ){
+        shwoFunc(showMessage)
+      }
+     
+     
     }, 5000);
     return () => clearTimeout(messageOpen);
   }, []);

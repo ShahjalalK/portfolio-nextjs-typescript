@@ -6,6 +6,7 @@ import MessageApi from '@/firebaseApi/messageApi';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import React, { useEffect, useMemo } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { Circles } from 'react-loader-spinner';
 import { useSetRecoilState } from 'recoil';
 
 
@@ -41,12 +42,41 @@ useEffect(() => {
   return (
    <section className="section-padding ">
     {user?.email === "shahjalalkhan895@gmail.com" ? 
+    <>
+    {loading ? <div className="w-full flex items-center justify-center">
+      <Circles
+      height="80"
+      width="80"
+      color="#4fa94d"
+      ariaLabel="circles-loading"
+      wrapperStyle={{}}
+      wrapperClass=""
+      visible={true}
+    />
+    </div> : <MyMessage />} 
     
-    <MyMessage />
+    
+    </>
+    
     
     :
+    <>
+{loading ? <div className="w-full flex items-center justify-center">
+      <Circles
+      height="80"
+      width="80"
+      color="#4fa94d"
+      ariaLabel="circles-loading"
+      wrapperStyle={{}}
+      wrapperClass=""
+      visible={true}
+    />
+    </div> : <Login />} 
 
-    <Login />
+
+</>
+
+    
   
   }
     

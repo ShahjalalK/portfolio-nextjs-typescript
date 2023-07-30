@@ -7,6 +7,8 @@ import React from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
 
+
+
 type Props = {}
 
 const MessageHandlerApi = () => {
@@ -17,10 +19,29 @@ const MessageHandlerApi = () => {
 
 const [messageState, setMessageState] = useRecoilState<messageContentType>(messageContentState)
     const messageRef = collection(firestore, "users", `${cookeValue.id ? cookeValue.id : userCooke.id}`, "message")
-
-  
-  
     
+   
+    
+    const emailHandler = async () => {
+      try {
+        await fetch("/api/contact", {
+          method : "POST",
+          headers : {
+            "Content-Type" : "application/json"                
+          },
+          body : JSON.stringify({                
+            email : cookeValue.email ? cookeValue.email : userCooke.email,
+            name : cookeValue.name ? cookeValue.name : userCooke.name,
+            subject : `${userCooke.name}- messaged you from your website`,
+            message : messageState.content, 
+          })
+         })
+        
+      } catch (error: any) {
+        console.log(error.message)
+      }
+    }
+  
     const messageHandler = async (setMessageHeight : React.Dispatch<React.SetStateAction<string | number | undefined>>) => {
         if(!userCooke){
             setMessageSignupState((prev) => ({
@@ -37,6 +58,7 @@ const [messageState, setMessageState] = useRecoilState<messageContentType>(messa
           }
           
           try {
+
             
             const res = await addDoc(messageRef, {
               email : cookeValue.email ? cookeValue.email : userCooke.email,
@@ -84,9 +106,9 @@ const [messageState, setMessageState] = useRecoilState<messageContentType>(messa
               
                 
              }
+
         
-             
-            
+        
               setMessageState((prev) => ({
                 ...prev,
               media : {} as File,
@@ -95,6 +117,8 @@ const [messageState, setMessageState] = useRecoilState<messageContentType>(messa
               }))
 
               setMessageHeight("20px");
+
+
               
             
           } catch (error : any) {
@@ -178,7 +202,8 @@ const [messageState, setMessageState] = useRecoilState<messageContentType>(messa
     
   return {
         messageHandler,
-        myMessageHandler
+        myMessageHandler,
+        emailHandler
   }
 }
 
