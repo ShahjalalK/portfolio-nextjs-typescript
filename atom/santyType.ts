@@ -14,9 +14,18 @@ export interface homeSectionType extends Base {
     _type : "home"
   }
 
+  export interface basicInfoType extends Base {
+    name : string,
+    myImage : string,
+    _type : "basicInfo",
+    email : string,
+    title : string,
+    hireLink : string    
+  }
+
   export interface aboutSectionType extends Base {
     subtitle : string,
-    title : string
+    title : string,
     _type : "about",
     experience : string,
     phone : string,
@@ -25,6 +34,7 @@ export interface homeSectionType extends Base {
     description : string,
     clientNumber : number,
     experienceYears : number,
+    aboutImage : string,
     uploadCV : string,
     name : string,
     client : string

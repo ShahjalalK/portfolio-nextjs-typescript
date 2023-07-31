@@ -74,7 +74,7 @@ Worldwide...</p>
 
       <div className="flex flex-col space-y-4">
         <motion.div initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}} className="h-52 w-52 rounded-full object-cover overflow-hidden mx-auto">
-        <Image src="/about-banner2.jpg" width={450} height={450} alt='about-banner' className="w-52 object-cover" />
+        <Image src={aboutSectionData[0].aboutImage} width={450} height={450} alt='about-banner' className="w-52 object-cover" />
         </motion.div>
         <div className="flex flex-col space-y-1">
         <motion.h1 initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}} className=" uppercase text-2xl text-secoundary font-bold text-center">{aboutSectionData[0].name}</motion.h1>

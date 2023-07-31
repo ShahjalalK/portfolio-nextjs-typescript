@@ -6,11 +6,19 @@ const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3000'
 const homeSectionQuery = groq`
 *[_type == "home"]
 `
+
+const basicInfoQuery = groq`
+*[_type == "basicInfo"]{   
+  ...,
+  "myImage": myImage.asset->url  
+}
+`
 const aboutSectionQuery = groq`
 *[_type == "about"]{   
   ...,
+  "aboutImage": aboutImage.asset->url,
   "uploadCV": uploadCV.asset->url
-
+  
 }
 `
 
@@ -48,10 +56,16 @@ const portfolioSectionQuery = groq`
 //     return res
 // }
 
+export const fetchBasicInfoSection = async () => {  
+      
+  return await client.fetch(basicInfoQuery) 
+}
+
 export const fetchHomeSection = async () => {  
       
     return await client.fetch(homeSectionQuery) 
 }
+
 
 export const fetchAboutSection = async () => {  
       
@@ -68,7 +82,7 @@ export const fetchfrontEndSkillSectionSection = async () => {
   return await client.fetch(frontEndSkillSectionQuery) 
 }
 
-export const fetchServiceSectionSection = async () => {  
+export const fetchServiceSectionSection = async () => {
       
   return await client.fetch(serviceSectionQuery) 
 }

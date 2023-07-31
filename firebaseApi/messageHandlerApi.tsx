@@ -24,6 +24,10 @@ const [messageState, setMessageState] = useRecoilState<messageContentType>(messa
     
     const emailHandler = async () => {
       try {
+        if(!cookeValue.email && !userCooke.email){                 
+          return
+        } 
+
         await fetch("/api/contact", {
           method : "POST",
           headers : {

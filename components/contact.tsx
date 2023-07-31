@@ -20,7 +20,7 @@ const Contact = (props: Props) => {
 
     const submitHandler  = (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        window.location.href = `mailto:shahjalalkhan895@gmail.com?subject=${contact.subject}&body=Hi, my name is ${contact.name}. ${contact.message}`
+        window.location.href = `mailto:shahjalalk.web@gmail.com?subject=${contact.subject}&body=Hi, my name is ${contact.name}. ${contact.message}`
         resetContact()
     }
 

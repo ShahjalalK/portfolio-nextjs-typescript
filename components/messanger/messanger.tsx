@@ -63,7 +63,7 @@ const shwoFunc = async (showMessage : boolean) => {
         <div className="w-full h-[350px] md:h-[400px] mb-10  bg-[#1b2137] overflow-y-auto overflow-x-hidden flex flex-col space-y-4 p-3 py-5 border border-primary ">
        
         {!userCooke.email &&  !cookeValue.email  &&  <Signup />}
-        {!userCooke.email &&  !cookeValue.email  &&  <HelloMessage />}
+        
        
         
           {messageValue.map((item) => {
@@ -84,7 +84,7 @@ const shwoFunc = async (showMessage : boolean) => {
             )
           })}
          
-        
+          <HelloMessage />
           
         
         

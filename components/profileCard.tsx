@@ -1,3 +1,4 @@
+import { basicInfoType } from '@/atom/santyType'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -6,9 +7,11 @@ import {FaLinkedinIn} from 'react-icons/fa'
 import {HiOutlineMail} from 'react-icons/hi'
 import { Typewriter } from 'react-simple-typewriter'
 
-type Props = {}
+type Props = {
+  BasicInfoData : basicInfoType[]
+}
 
-const ProfileCard = (props: Props) => {
+const ProfileCard = ({BasicInfoData}: Props) => {
   return (
     <div className="border border-white/75 rounded-2xl p-5 ">
         <div className="flex items-center justify-between">
@@ -27,9 +30,9 @@ const ProfileCard = (props: Props) => {
               </span> 
               </p>
         </div>
-        <Image src="/profile2.webp" alt='me' width={350} height={350} className=" rounded-3xl my-5 mx-auto w-60" />
+        <Image src={BasicInfoData[0].myImage} alt='me' width={350} height={350} className=" rounded-3xl my-5 mx-auto w-60" />
         <div className="text-white mt-5 justify-center flex flex-col text-center text-xl">
-            <h3 className="text-sm text-white/75"><Link href="mailto:shahjalalk.web@gmail.com" className="">shahjalalk.web@gmail.com</Link></h3>
+            <h3 className="text-sm text-white/75"><Link href={`mailto:${BasicInfoData[0].email}`} className="">{BasicInfoData[0].email}</Link></h3>
             <h2 className="text-xl">Kushtia, Dhaka, Bangladesh</h2>
         </div>
         <div className="mt-5 flex justify-center items-center space-x-3">
@@ -50,7 +53,7 @@ const ProfileCard = (props: Props) => {
                 
                 <BsFacebook className="text-xl " /></Link>
         </div>
-        <Link href="https://www.fiverr.com/shahjalalk" target="_blank" className=" button w-full flex justify-center text-white py-3 mt-5"><span className="flex items-center space-x-2"><HiOutlineMail className="text-white text-2xl" /> <span> Hire Me</span></span><i></i></Link>
+        <Link href={BasicInfoData[0].hireLink} target="_blank" className=" button w-full flex justify-center text-white py-3 mt-5"><span className="flex items-center space-x-2"><HiOutlineMail className="text-white text-2xl" /> <span> Hire Me</span></span><i></i></Link>
     </div>
   )
 }

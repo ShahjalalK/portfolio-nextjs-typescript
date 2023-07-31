@@ -20,6 +20,15 @@ export const AboutSectionSchema: SchemaTypeDefinition = {
             validation : (Role) => Role.required()
         },
         {
+            name : "aboutImage",
+            title : "About Image",
+            type : "image",
+            options : {
+                hotspot : true
+            },
+            validation : (Role) => Role.required()
+        },
+        {
             name : "uploadCV",
             title : "Upload CV",
             type : "file",

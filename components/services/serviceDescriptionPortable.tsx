@@ -13,7 +13,7 @@ export const ServiceDescriptionPortable = {
       <span className="bg-secoundary/20 px-2 py-1">{children}</span>
     ),
     li: ({children} : any) => (
-      <li className="ml-3">{children}</li>
+      <li className="ml-1 md:ml-3">{children}</li>
     ),
     p: ({children} : any) => (
       <p className="mt-3">{children}</p>

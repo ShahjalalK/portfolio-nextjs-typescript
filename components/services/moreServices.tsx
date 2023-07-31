@@ -36,7 +36,7 @@ const MoreServices = ({allServiceData, slugId}: Props) => {
          <h1 className="text-xl mb-5">More services by <span className="text-secoundary mb-10">Shahjalal Khan</span></h1>
         <div className=" relative">
         <Swiper        
-        className=" max-h-[16rem] "
+        className=" md:max-h-[16rem] "
         breakpoints={{          
           640: {
             slidesPerView: 1,
@@ -68,7 +68,7 @@ const MoreServices = ({allServiceData, slugId}: Props) => {
                </div>
                <span className="text-sm pr-3 font-bold text-primary">Lavel 1</span>
                </div>
-               <p className=" line-clamp-2 md:text-sm group-hover:underline">{service.serviceTitle}</p>
+               <p className=" line-clamp-2 md:text-sm  md:group-hover:underline">{service.serviceTitle}</p>
               </Link>
              </motion.div>
              </SwiperSlide>

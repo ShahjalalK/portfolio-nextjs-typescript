@@ -14,7 +14,7 @@ const GigSlider = ({ slideRef, Media }: Props) => {
       slidesPerView={1}
       loop={true}
       ref={slideRef as any}
-      className=" max-h-[25rem] "
+      className=" max-h-[14rem] md:max-h-[25rem] "
     >
       {Media.map((item) => (
         <SwiperSlide key={item._id}>

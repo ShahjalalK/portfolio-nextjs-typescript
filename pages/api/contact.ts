@@ -14,10 +14,7 @@ export default async function handler(
 ) {
     if(req.method === "POST"){
         const data = req.body
-        if(!data.name || !data.email || !data.subject || !data.message){
-           
-           return
-        }
+        if(!data.name || !data.email || !data.subject || !data.message) return
 
         try {
             await transporter.sendMail({

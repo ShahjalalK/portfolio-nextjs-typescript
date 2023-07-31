@@ -23,6 +23,7 @@ const Signup = (props: Props) => {
 
 
 
+
     const addMessage = async (id : string) => {
 
       if(!email || !name){
@@ -53,7 +54,8 @@ const Signup = (props: Props) => {
         id,
         timestamp : serverTimestamp() as any
        })
-       location.reload()
+      //  location.reload()
+      
       
     }
 
@@ -62,7 +64,12 @@ const Signup = (props: Props) => {
        
       await addMessage(uuidv4())
      
-    
+      if(router.pathname == "/"){
+        router.push("/service/clickable-email-signature")
+      }else{
+        router.push("/")
+      }
+      
     }
 
 

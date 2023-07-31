@@ -9,5 +9,6 @@ import { pricingSchema } from './pricing'
 import { ServiceSectionSchema } from './service-section'
 import { frontEndSkillSectionSchema } from './skill-section'
 import { TestimonialSectionSchema } from './testimonial-section'
+import { BasicInfoSchema } from './basicInfo'
 
-export const schemaTypes = [HomeSectionSchema, AboutSectionSchema, TestimonialSectionSchema, frontEndSkillSectionSchema, ServiceSectionSchema, portfolioSectionSchema, servicePageSchema, gigMedia, pricingSchema]
+export const schemaTypes = [BasicInfoSchema, HomeSectionSchema, AboutSectionSchema, TestimonialSectionSchema, frontEndSkillSectionSchema, ServiceSectionSchema, portfolioSectionSchema, servicePageSchema, gigMedia, pricingSchema]

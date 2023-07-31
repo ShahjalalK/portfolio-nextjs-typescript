@@ -4,12 +4,7 @@ import React, { useState, useEffect } from "react";
 import { RiMenu2Line } from "react-icons/ri";
 import {
   Link as Links,
-  Button,
-  Element,
-  Events,
   animateScroll as scroll,
-  scrollSpy,
-  scroller,
 } from "react-scroll";
 import { motion } from "framer-motion";
 import { AiOutlineClose } from "react-icons/ai";
@@ -24,7 +19,6 @@ const Navbar = (props: Props) => {
   const [showMenu, setShowMenu] = useState(false);
   const [shadowNave, setShadowNave] = useState(false);
   const [user, loading, error] = useAuthState(auth);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -40,6 +34,13 @@ const Navbar = (props: Props) => {
       }
     });
   }, []);
+
+
+  
+  
+
+
+  
 
 
 
@@ -206,7 +207,8 @@ const Navbar = (props: Props) => {
           
         </motion.ul>
         <Link
-          href="/"
+          href="https://www.fiverr.com/shahjalalk"
+          target="_blank"
           className="hidden lg:inline-flex px-7 py-2.5 button font-bold"
         >
           {" "}

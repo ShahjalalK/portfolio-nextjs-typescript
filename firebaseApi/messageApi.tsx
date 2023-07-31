@@ -8,7 +8,8 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 type Props = {}
 
 const MessageApi = () => {
-  const cookeValue = useRecoilValue<allMessageType>(userCookieState)
+  const [cookeValue, setCookieValue] = useRecoilState<allMessageType>(userCookieState)
+ 
   const [messageState, setMessageState] = useRecoilState<messageType[]>(clientMessageState)  
   const [myMessage, setMyMessage] = useRecoilState<messageType[]>(myMessageState)
 
@@ -26,7 +27,7 @@ const MessageApi = () => {
   
     const GetClientMessage = () => {
      
-      
+     
 
      onSnapshot(query(messageRef, orderBy("timestamp", "desc")), (snapshot) => {
      

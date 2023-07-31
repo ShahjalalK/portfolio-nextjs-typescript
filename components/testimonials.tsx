@@ -51,7 +51,7 @@ const Testimonials = (testiMonailSectionData: Props) => {
         
         
       >
-        <motion.div initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}}  className=" absolute top-0 right-0 z-10 flex items-center space-x-2 ">
+        <motion.div initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}}  className=" absolute top-0 right-[50%] md:right-0 z-10 flex items-center space-x-2 ">
           <button onClick={prevSlide} className="text-2xl text-white hover:text-secoundary"><AiOutlineLeft /></button>
           {/* <span className="swiper-paginations text-sm !text-white/30 font-normal !inline-flex [&>*:first-child]:!text-white/75 "></span> */}
           <button onClick={nextSlide} className="text-2xl text-white hover:text-secoundary"><AiOutlineRight /></button>

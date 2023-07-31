@@ -23,8 +23,8 @@ const Basic = ({pricingInfo}: Props) => {
         <p><span className="font-bold">Save up</span> to {pricingInfo[0].save}% with <span className="text-secoundary">Subscribe to Save</span></p>
         <p className="mt-5"><span className="font-bold">{pricingInfo[0].contentBold}</span> {pricingInfo[0].content}</p>
 
-        <div className="mt-10">
-    <div className="flex items-center space-x-5">
+        <div className="mt-5">
+    <div className="flex flex-col space-y-1 items-start md:flex-row md:items-center md:space-x-5">
    <p className="flex items-center space-x-2"><AiOutlineClockCircle className="text-xl" /> <span className="font-bold">{pricingInfo[0].delevery} Day Delivery</span></p>
    {pricingInfo[0].rivishion && <p className="flex items-center space-x-2"><BiRevision className="text-xl" /> <span className="font-bold">Unlimited Revisions</span></p>}
    </div>

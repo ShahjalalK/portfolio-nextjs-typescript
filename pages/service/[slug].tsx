@@ -43,19 +43,6 @@ const ServiceId = ({service, allServiceData, slugId}: Props) => {
 
 export default ServiceId
 
-// export const getStaticPaths: GetStaticPaths = async () => {
-//   return {
-//     paths: [
-//       {
-//         params: {
-//           name: 'next.js',
-//         },
-//       }, // See the "paths" section below
-//     ],
-//     fallback: true, // false or "blocking"
-//   }
-// }
-
 
 export const getServerSideProps : GetServerSideProps = async (context : GetServerSidePropsContext) => {
  const slugId = context.query.slug as string
