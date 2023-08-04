@@ -1,10 +1,10 @@
-import { allMessageType, messageContentState, messageContentType, messageSignupState, messageSignupType, userCookieState } from '@/atom/messageState'
+import { allMessageState, allMessageType, messageContentState, messageContentType, messageSignupState, messageSignupType, userCookieState, userMessageState } from '@/atom/messageState'
 import { firestore, storage } from '@/firebase.config'
 import { addDoc, collection, doc, serverTimestamp, updateDoc } from 'firebase/firestore'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { parseCookies } from 'nookies'
 import React from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 
 
@@ -18,15 +18,17 @@ const MessageHandlerApi = () => {
     const userCooke = cookie.user ? JSON.parse(cookie.user) : ""
 
 const [messageState, setMessageState] = useRecoilState<messageContentType>(messageContentState)
+
+const userValue = useRecoilValue<allMessageType>(userMessageState)
     const messageRef = collection(firestore, "users", `${cookeValue.id ? cookeValue.id : userCooke.id}`, "message")
     
    
     
-    const emailHandler = async () => {
+    const emailHandler = async (mediaImage : string) => {
       try {
-        if(!cookeValue.email && !userCooke.email){                 
-          return
-        } 
+        if(!cookeValue.email && !userCooke.email) return
+        
+        if(!userValue.emailProvider) return
 
         await fetch("/api/contact", {
           method : "POST",
@@ -36,8 +38,10 @@ const [messageState, setMessageState] = useRecoilState<messageContentType>(messa
           body : JSON.stringify({                
             email : cookeValue.email ? cookeValue.email : userCooke.email,
             name : cookeValue.name ? cookeValue.name : userCooke.name,
+            id : cookeValue.id ? cookeValue.id : userCooke.id,
             subject : `${userCooke.name}- messaged you from your website`,
             message : messageState.content, 
+            media : mediaImage
           })
          })
         
@@ -75,7 +79,7 @@ const [messageState, setMessageState] = useRecoilState<messageContentType>(messa
         
              if(messageState.previewImage){
              
-                const storageRef = ref(storage, `messages/${res.id}`);
+                const storageRef = ref(storage, `messages/${cookeValue.id ? cookeValue.id : userCooke.id}/${res.id}`);
               const uploadTask = uploadBytesResumable(storageRef, messageState.media);
         
               await uploadTask.on('state_changed', 
@@ -104,14 +108,17 @@ const [messageState, setMessageState] = useRecoilState<messageContentType>(messa
                     updateDoc(docRef, {
                       media : downloadURL
                     })
+                    emailHandler(downloadURL)
                   });
                 }
               )
               
                 
+             }else{
+              emailHandler("")
              }
 
-        
+            
         
               setMessageState((prev) => ({
                 ...prev,
@@ -129,6 +136,10 @@ const [messageState, setMessageState] = useRecoilState<messageContentType>(messa
             console.log(error.message)
           }
      }
+
+   
+
+ 
 
 
      const myMessageHandler = async (id : string) => {
@@ -154,7 +165,7 @@ const [messageState, setMessageState] = useRecoilState<messageContentType>(messa
       
            if(messageState.previewImage){
            
-              const storageRef = ref(storage, `messages/${res.id}`);
+              const storageRef = ref(storage, `messages/${id}/${res.id}`);
             const uploadTask = uploadBytesResumable(storageRef, messageState.media);
       
             await uploadTask.on('state_changed', 
@@ -179,7 +190,7 @@ const [messageState, setMessageState] = useRecoilState<messageContentType>(messa
                 // Handle successful uploads on complete
                 // For instance, get the download URL: https://firebasestorage.googleapis.com/...
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                  const docRef = doc(firestore, "users", `${cookeValue.id ? cookeValue.id : userCooke.id}`, "message", res.id)
+                  const docRef = doc(firestore, "users", `${id}`, "message", res.id)
                   updateDoc(docRef, {
                     media : downloadURL
                   })

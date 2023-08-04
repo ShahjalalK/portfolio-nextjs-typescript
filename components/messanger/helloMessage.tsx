@@ -7,7 +7,7 @@ const HelloMessage = (props: Props) => {
   return (
     <div className=" flex justify-start items-start flex-col space-y-1 rounded">
                    
-                    <div className="whitespace-normal text-sm bg-secoundary/10 p-2 rounded-r-md rounded-tl-md ml-5 font-normal text-white border border-white/30 flex flex-col -space-y-5 items-center">
+                    <div className="whitespace-normal text-sm bg-[#D9D9D7]/10 p-2 rounded-r-md rounded-tl-md ml-5 font-normal text-white border border-white/30 flex flex-col -space-y-5 items-center">
                     <Image src="/hi.webp" alt='hello' width={300} height={300} className="w-32" />
                       <p>👋 Hey there, How can I help you?</p> 
                       </div>                   

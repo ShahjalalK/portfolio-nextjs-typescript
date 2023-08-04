@@ -1,5 +1,5 @@
 import Hero from '@/components/hero'
-import { firestore } from '@/firebase.config'
+import { auth, firestore } from '@/firebase.config'
 import MessageApi from '@/firebaseApi/messageApi'
 import { fetchHomeSection, fetchAboutSection, fetchTestimonialSection, fetchfrontEndSkillSectionSection, fetchServiceSectionSection, fetchPortfolioSectionSection, fetchBasicInfoSection } from '@/untils/fetchSanity'
 
@@ -8,6 +8,7 @@ import Meta from '@/meta/meta'
 import { GetStaticProps } from 'next'
 import React, {useEffect} from 'react'
 import { aboutSectionType, basicInfoType, frontEndSkillsSectionType, homeSectionType, portfolioSectionType, serviceSectionType, testimonialSectionType } from '@/atom/santyType'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 
 
@@ -22,14 +23,21 @@ type Props = {
 }
 
 const Home = ({BasicInfoData, homeSectionData, aboutSectionData, testiMonailSectionData, frontEndSkillSectionData, serviceSectionData, portfolioSectionData} : Props) => {
-  const {GetClientMessage} = MessageApi()
+  const {GetClientMessage, getUser} = MessageApi()
+  const [user, loading, error] = useAuthState(auth);
 
 
 useEffect(() => {
   GetClientMessage()
 }, [firestore])
 
-
+useEffect(() => {
+  if(user?.email !== "shahjalalkhan895@gmail.com"){
+    getUser()
+  }
+ 
+  
+}, [firestore])
 
 
   return (

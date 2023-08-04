@@ -36,7 +36,7 @@ const MoreServices = ({allServiceData, slugId}: Props) => {
          <h1 className="text-xl mb-5">More services by <span className="text-secoundary mb-10">Shahjalal Khan</span></h1>
         <div className=" relative">
         <Swiper        
-        className=" md:max-h-[16rem] "
+        className=" md:max-h-[16rem]  "
         breakpoints={{          
           640: {
             slidesPerView: 1,

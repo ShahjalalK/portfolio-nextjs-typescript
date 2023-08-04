@@ -35,7 +35,7 @@ const Content = ({title, Media, description}: Props) => {
 
   return (
     <div className="md:col-span-2 md:mr-16">
-      <h1 className="text-3xl font-bold">
+      <h1 className="text-3xl font-bold text-info/90">
         {title}
       </h1>
       

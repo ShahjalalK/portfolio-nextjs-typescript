@@ -17,7 +17,7 @@ type Props = {
 const Me = ({item, id}: Props) => {
   const deleteMessage = async () => {
     const deleteRef = doc(firestore, "users", id, "message", item.messageId) 
-    const desertRef = ref(storage, `messages/${item.messageId}`);  
+    const desertRef = ref(storage, `messages/${id}/${item.messageId}`);  
    if(item.media){
     await deleteObject(desertRef)
    } 
@@ -30,7 +30,7 @@ const Me = ({item, id}: Props) => {
        <div className="flex flex-col -space-y-1">
        <div className="flex items-center space-x-2">
        <h3 className="font-bold capitalize">{item.name}</h3>
-       <span onClick={() => deleteMessage()} className="cursor-pointer"><MdDelete /></span>
+       <span onClick={() => deleteMessage()} className="cursor-pointer text-primary/50 hover:text-primary/100"><MdDelete /></span>
        </div>
        <p className="text-xs"><span><Moment fromNow>{item.timestamp?.toDate()}</Moment></span> | <span>{item.email}</span></p>
        </div>

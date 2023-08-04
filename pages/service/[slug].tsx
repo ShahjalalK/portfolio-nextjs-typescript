@@ -3,7 +3,7 @@ import React, {useEffect} from 'react'
 import Content from '@/components/services/content'
 import MoreServices from '@/components/services/moreServices'
 import Package from '@/components/services/package'
-import { firestore } from '@/firebase.config'
+import { auth, firestore } from '@/firebase.config'
 import MessageApi from '@/firebaseApi/messageApi'
 import Meta from '@/meta/meta'
 import { GetServerSideProps, GetServerSidePropsContext, GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
@@ -11,6 +11,7 @@ import { fetchServiceSectionSection } from '@/untils/fetchSanity'
 import { groq } from 'next-sanity'
 import { client } from '@/lib/sanity.client'
 import { serviceSectionType } from '@/atom/santyType'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 type Props = {
   service : serviceSectionType,
@@ -21,11 +22,23 @@ type Props = {
 
 
 const ServiceId = ({service, allServiceData, slugId}: Props) => {
-    const {GetClientMessage} = MessageApi()
+    const {GetClientMessage, getUser} = MessageApi()
+    const [user, loading, error] = useAuthState(auth);
+   
 
   useEffect(() => {
     GetClientMessage()
   }, [firestore])
+
+  
+useEffect(() => {
+  if(user?.email !== "shahjalalkhan895@gmail.com"){
+    getUser()
+  }
+ 
+  
+}, [firestore])
+
   return (
     <section className="section-padding font-Roboto">
     <Meta title='Clickable email signature' /> 

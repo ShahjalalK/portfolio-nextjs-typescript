@@ -44,6 +44,7 @@ const Signup = (props: Props) => {
       await setDoc(docRef, {
         email,
         name,
+        emailProvider : true,
         id,
         timestamp : serverTimestamp()       
        })
@@ -51,6 +52,7 @@ const Signup = (props: Props) => {
       setCookieState({
         email,
         name,
+        emailProvider : true,
         id,
         timestamp : serverTimestamp() as any
        })

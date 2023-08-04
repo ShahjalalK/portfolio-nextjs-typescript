@@ -64,11 +64,11 @@
 
 
   header{
-    @apply fixed top-0 left-0 w-full py-2 bg-[transparent] z-50
+    @apply fixed top-0 left-0 w-full bg-[transparent] z-50
   }
 
   .navLink{
-    @apply text-white hover:text-secoundary transition-colors duration-75 cursor-pointer text-lg font-normal
+    @apply text-white hover:text-secoundary transition-colors duration-75 cursor-pointer text-sm font-normal
   }
  .navLink.active{
     @apply text-secoundary
@@ -183,7 +183,18 @@
     @apply font-normal text-sm uppercase text-white/75 mt-1
   }
 
-  
+ .checkButton{
+  @apply relative w-[40px] h-[20px] appearance-none bg-[#c6c6c6] outline-none rounded-[20px] transition-all duration-100 shadow-chackBoxShadow cursor-pointer
+ }
+ .checkButton:checked{
+  @apply bg-secoundary/30
+ }
+ .checkButton::before{
+  @apply content-[""] absolute w-[20px] h-[20px] rounded-full top-0 left-0 bg-primary/50 transition-all duration-100 scale-110  shadow-chackBoxBeforeShadow
+ }
+ .checkButton:checked::before{
+  @apply left-[20px]
+ }
 }
 
 .skill-container .card .percent svg circle:nth-child(2){

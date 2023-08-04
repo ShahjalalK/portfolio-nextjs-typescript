@@ -4,7 +4,7 @@ import Login from '@/components/my-message-deshboard/login';
 import Me from '@/components/my-message-deshboard/me';
 import { v4 as uuidv4 } from 'uuid';
 import { auth, firestore } from '@/firebase.config';
-import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, onSnapshot, orderBy, query, serverTimestamp, where } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -15,14 +15,34 @@ import MessageApi from '@/firebaseApi/messageApi';
 import Image from 'next/image';
 import { AiOutlineClose } from 'react-icons/ai';
 import MessageHandlerApi from '@/firebaseApi/messageHandlerApi';
+import Emoji from '@/components/messanger/emoji';
+import {motion} from 'framer-motion'
+import Moment from 'react-moment';
+import AllClient from '@/components/my-message-deshboard/allClient';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import SafeJsonStringfy from 'safe-json-stringify'
+import { parseCookies } from 'nookies';
+import MyMessageHeader from '@/components/my-message-deshboard/myMessageHeader';
+import { Circles } from 'react-loader-spinner';
 
 
 
 
-type Props = {}
+type Props = {
+  userData : allMessageType,
+  id : string
+}
 
-const MessageId = (props: Props) => {
+
+
+const MessageId = ({userData, id}: Props) => {
+
+//   const router = useRouter()
+ 
+// const userrouterId = router.query.pid as string
+
   const [user, loading, error] = useAuthState(auth);
+  const [showEmoji, setShowEmoji] = useState(false)
 
  
   const [userState, setUserState] = useRecoilState<allMessageType>(userMessageState)
@@ -31,15 +51,14 @@ const MessageId = (props: Props) => {
   
   const [message, setMessage] = useRecoilState(messageContentState)
   
+useEffect(() => {
+  setUserState(userData as allMessageType)
+ }, [userData])
 
 
- const router = useRouter()
- const id = router.query.pid as string
-
-
-
- const {GetClientMessage, getMyMessage} = MessageApi()
+ const {GetClientMessage, getMyMessage, getAllUsers} = MessageApi()
  const {myMessageHandler} = MessageHandlerApi()
+ 
 
 
  const changeHanderImage = (e : React.ChangeEvent<HTMLInputElement>) => {
@@ -67,112 +86,177 @@ const closeImage = () => {
   myMessageHandler(id) 
 }
 
+useEffect(() => {
+  getMyMessage(id)
+ 
+}, [firestore])
 
  useEffect(() => {
    GetClientMessage()
  }, [firestore])
 
 
-useEffect(() => {
-  const userQuery = query(collection(firestore, "users"), where("id", "==", id as string))
-  onSnapshot(userQuery, (res) => {
-    res.docs.map((item) => {
-      setUserState(item.data() as allMessageType)
-    })   
-   })
-}, [firestore])
 
-
-
-
-
+const onKeyPressHandle = (e: any) => {  
+  
+    if(e.keyCode == "13"){
+      myMessageHandler(id) 
+    }
+    setShowEmoji(false)
+    
+    
+  
+};
 
 useEffect(() => {
-  getMyMessage(id)
- 
+  getAllUsers()
+  
 }, [firestore])
-
 
 
 
   return (
-    <div className="section-padding">
+    <div className="my-[110px] max-w-6xl mx-auto">
       {user?.email === "shahjalalkhan895@gmail.com" ? 
       
-      <div className="max-w-2xl mx-auto font-Roboto">
-        <div className="flex items-center space-x-2 mb-5">
-          <div className="flex items-center justify-center w-10 h-10 rounded-full border border-primary/30 "><span className="text-xl">{userState.name[0]}</span></div>
-          <div className="flex flex-col -space-y-1">
-            <h1 className="text-lg font-medium">{userState.name}</h1>
-            <p className="text-sm">{userState.email}</p>
-          </div>
-        </div>
-        <div className="relative mb-10">
-        <div className=" flex flex-col space-y-6 pb-28 pt-5 h-[450px] overflow-y-scroll overflow-x-hidden p-3 border border-primary/30 rounded relative">
+      <>
+      
+      {loading ? <div className="w-full flex items-center justify-center">
+      <Circles
+      height="80"
+      width="80"
+      color="#4fa94d"
+      ariaLabel="circles-loading"
+      wrapperStyle={{}}
+      wrapperClass=""
+      visible={true}
+    />
+    </div>
 
-      {myMessage.map((item, index) => {
-        if(item.timestamp == null){
-          const audio = new Audio("/message-button.mp3")
-            audio.play()
-         }
-        return(
-         <>
-          {item.id === "cca5740a-6dd6-4fa9-b4da-6598ef9e49da" ? (
-            <Me item={item} id={id} key={index} />
-          ) : (
-            <Client item={item} id={id}  key={index} />
-          )}
-         
-         </>
-        )
-      })}
+    :
 
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+      
+  
+    <AllClient userId={id} />
+    
 
+     <div className="font-Roboto lg:col-span-2 flex flex-col  max-w-xl">
+       <MyMessageHeader />
+       <div className="relative mb-10">
+       <div className=" flex flex-col space-y-6 pb-28 pt-5 h-[450px] overflow-y-scroll overflow-x-hidden p-3 border border-primary/30 rounded rounded-t-none relative">
 
-
-
-        
-        
-       
-      </div>
-      <form onSubmit={submitHandler}  className="absolute flex-grow bottom-0 left-0 w-full p-3 bg-[#E7E8EA] border-t border-t-secoundary ">
-       {message.previewImage &&  
-       <div className="w-32 h-20 overflow-x-hidden overflow-y-scroll relative ">
-          <Image src={message.previewImage} width={550} height={550} className="w-32 h-auto" alt='preview' />
-          <AiOutlineClose className=" absolute top-2 right-2 text-xl shadow shadow-secoundary text-primary z-20 cursor-pointer" onClick={closeImage} />
-        </div>
+     {myMessage.map((item, index) => {
+       if(item.timestamp == null){
+         const audio = new Audio("/message-button.mp3")
+           audio.play()
         }
-          <div className="flex items-center space-x-5">
-          <textarea value={message.content} onChange={(e) => setMessage((prev) => ({
-            ...prev,
-            content : e.target.value
-          }))} placeholder="Start Typing..." className="flex-grow border border-primary/30 rounded p-1 focus:outline-none bg-[transparent] min-h-[50px] max-h-32" ></textarea>
-          <div className="flex items-center space-x-5">
-            <BsFillEmojiSmileFill className="cursor-pointer text-2xl text-primary/80 hover:text-primary/100" />
-            <div>
-              <label htmlFor="atachId">
-              <ImAttachment className="cursor-pointer text-2xl text-primary/80 hover:text-primary/100" />
-              </label>
-              <input onChange={changeHanderImage} type="file" accept='image/*' id='atachId' className="hidden" />
-             
-            </div>
-            <button type="submit" className="text-primary hover:text-secoundary text-2xl"><BsFillSendFill /></button>
-          </div>
-          </div>
-        </form>
-        </div>
-     
+       return(
+        <>
+         {item.id === "cca5740a-6dd6-4fa9-b4da-6598ef9e49da" ? (
+           <Me item={item} id={id} key={index} />
+         ) : (
+           <Client item={item} id={id}  key={index} />
+         )}
+        
+        </>
+       )
+     })}
+
+
+     </div>
+     <div  className={`absolute bottom-16 right-3 w-[245px] rounded-lg z-20 bg-[transparent] ${showEmoji ? "pointer-events-auto" : "pointer-events-none"} `}>
+      <div className={`relative h-52 overflow-y-hidden z-20  ${showEmoji ? "pointer-events-auto" : "pointer-events-none"}`}>
+      <motion.div initial={{y: "150%"}} animate={{ y : showEmoji ? 0 : "150%"}} transition={{duration : 0.5}} className="absolute top-0 right-0 flex items-end justify-end z-20">
+    <Emoji />
+    </motion.div >
       </div>
+      </div>
+     <form onSubmit={submitHandler}  className="absolute flex-grow bottom-0 left-0 w-full p-3 bg-primary border-t border-t-secoundary rounded-b ">
+      {message.previewImage &&  
+      <div className="w-32 h-20 overflow-x-hidden overflow-y-scroll relative ">
+         <Image src={message.previewImage} width={550} height={550} className="w-32 h-auto" alt='preview' />
+         <AiOutlineClose className=" absolute top-2 right-2 text-xl shadow shadow-secoundary text-white/50 z-20 cursor-pointer" onClick={closeImage} />
+       </div>
+       }
+         <div className="flex items-end space-x-5">
+         <textarea onKeyPress={onKeyPressHandle} value={message.content} onChange={(e) => setMessage((prev) => ({
+           ...prev,
+           content : e.target.value
+         }))} placeholder="Start Typing..." className="flex-grow border border-primary/30 rounded p-1 focus:outline-none min-h-[50px] max-h-32 bg-white/5 text-secoundary" ></textarea>
+         <div className="flex items-center space-x-3">
+           <BsFillEmojiSmileFill className={`cursor-pointer text-2xl text-white/50 hover:text-secoundary ${showEmoji && "!text-secoundary"}`} onClick={() => setShowEmoji(!showEmoji)} />
+           <div>
+             <label htmlFor="atachId">
+             <ImAttachment className="cursor-pointer text-2xl text-white/50 hover:text-secoundary" />
+             </label>
+             <input onChange={changeHanderImage} type="file" accept='image/*' id='atachId' className="hidden" />
+            
+           </div>
+           {(message.content.length > 0 || message.previewImage) && <button type="submit" className="text-secoundary/80 hover:text-secoundary text-2xl"><BsFillSendFill /></button>}
+           
+         </div>
+         </div>
+       </form>
+       </div>
+    
+     </div>
+  </div>
+
+        }
+      
+      </>
+
+    
 
       : 
-    
+
+      <>
+       {loading ? <div className="w-full flex items-center justify-center">
+      <Circles
+      height="80"
+      width="80"
+      color="#4fa94d"
+      ariaLabel="circles-loading"
+      wrapperStyle={{}}
+      wrapperClass=""
+      visible={true}
+    />
+    </div>
+
+    :
+
     <Login />
+      }
+      
+      </>
+    
+    
      
     
     }
     
     </div>
+   
   )
 }
 
+
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const id = ctx.query.pid as string
+  const userDocRef = doc(firestore, "users", id)  
+  const userData = await getDoc(userDocRef)
+ 
+  return { props: {
+    userData : userData.exists() ? JSON.parse(SafeJsonStringfy({id: userData.id, ...userData.data()})) : "",
+    id
+    } }
+}
+
+
 export default MessageId
+
+
+
+ 

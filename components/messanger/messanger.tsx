@@ -57,7 +57,7 @@ const shwoFunc = async (showMessage : boolean) => {
         initial={{ display: "none" }}
         animate={{ display: showMessage ? "block" : "none" }}
         transition={{ duration: 0.5 }}
-        className="rounded-xl shadow-2xl shadow-secoundary w-[95%] md:w-[400px] overflow-hidden relative"
+        className="rounded-xl shadow-2xl shadow-secoundary w-[340px] md:w-[400px] overflow-hidden relative"
       >
         <MessageHeader />
         <div className="w-full h-[350px] md:h-[400px] mb-10  bg-[#1b2137] overflow-y-auto overflow-x-hidden flex flex-col space-y-4 p-3 py-5 border border-primary ">

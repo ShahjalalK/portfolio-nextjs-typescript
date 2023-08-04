@@ -22,12 +22,15 @@ const Login = (props: Props) => {
 
     const submitHandler = (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if(!email || !password){
-            return
-        }
-        signInWithEmailAndPassword(email, password).then((res) => (
-            toast("Login was successful!")
-        ))
+        if(!email || !password) return
+       
+
+        signInWithEmailAndPassword(email, password).then((res) => {
+          toast("You are Login successfully😎")
+        })
+
+        
+        
     }
   return (
     <form onSubmit={submitHandler} className="max-w-md mx-auto flex flex-col space-y-3 mb-10">

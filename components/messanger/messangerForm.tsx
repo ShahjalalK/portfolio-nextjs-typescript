@@ -74,7 +74,7 @@ const MessangerForm = ({showEmoji, setShowEmoji}: Props) => {
       e.preventDefault()
       messageHandler(setMessageHeight)
       setShowEmoji(false)
-      emailHandler()
+      // emailHandler()
  }
   
   return (

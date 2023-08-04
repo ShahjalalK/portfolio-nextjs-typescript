@@ -19,14 +19,14 @@ const Standard = ({pricingInfo}: Props) => {
   const [includeValue, setIncludeValue] = useRecoilState<includeType>(useIncudeState)
   return (
     <div>
-    <h1 className="text-2xl font-bold">${pricingInfo[1].price}</h1>
-    <p><span className="font-bold">Save up</span> to {pricingInfo[1].save}% with <span className="text-secoundary">Subscribe to Save</span></p>
-    <p className="mt-5"><span className="font-bold">{pricingInfo[1].contentBold}</span> {pricingInfo[1].content}</p>
+    <h1 className="text-2xl font-bold text-info/90">${pricingInfo[1].price}</h1>
+    <p><span className="font-bold text-info/90">Save up</span> to {pricingInfo[1].save}% with <span className="text-secoundary">Subscribe to Save</span></p>
+    <p className="mt-5"><span className="font-bold text-info/90">{pricingInfo[1].contentBold}</span> {pricingInfo[1].content}</p>
 
     <div className="mt-5">
     <div className="flex flex-col space-y-1 items-start md:flex-row md:items-center md:space-x-5">
-   <p className="flex items-center space-x-2"><AiOutlineClockCircle className="text-xl" /> <span className="font-bold">{pricingInfo[1].delevery} Day Delivery</span></p>
-   {pricingInfo[1].rivishion && <p className="flex items-center space-x-2"><BiRevision className="text-xl" /> <span className="font-bold">Unlimited Revisions</span></p>}
+   <p className="flex items-center space-x-2 text-info/90"><AiOutlineClockCircle className="text-xl" /> <span className="font-bold">{pricingInfo[1].delevery} Day Delivery</span></p>
+   {pricingInfo[1].rivishion && <p className="flex items-center space-x-2 text-info/90"><BiRevision className="text-xl" /> <span className="font-bold ">Unlimited Revisions</span></p>}
    </div>
    <IncludeIcon />
     {includeValue.open ? 

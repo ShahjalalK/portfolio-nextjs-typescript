@@ -16,6 +16,7 @@ export interface messageType{
 export interface allMessageType {
     name : string,
     email : string,
+    emailProvider : boolean,
     id : string,
     timestamp : Timestamp
 }
@@ -35,6 +36,7 @@ export const allMessageState = atom<allMessageType[]>({
 const defaultUserState : allMessageType  = {
     name : "",
     email : "",
+    emailProvider : true,
     id : "",
     timestamp : Timestamp as any
 }

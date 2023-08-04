@@ -10,7 +10,8 @@ module.exports = {
       "primary" : '#141A31',
       "secoundary" : '#14C2A3',
       "white" : "#fff",
-      "thard" : "#04fc43"
+      "thard" : "#04fc43",
+      "info" : "#050301"
     },
     extend: { 
       fontFamily : {
@@ -20,8 +21,10 @@ module.exports = {
       boxShadow : {
         "3xl" : "0 0 16px",
         "2xl" : "0 0 8px",
-        "skillshadow" : "0 0 10px 0 0 30px"
-      },
+        "skillshadow" : "0 0 10px 0 0 30px",
+        "chackBoxShadow" : "inset 0 0 5px rgba(0,0,0,.2)",
+        "chackBoxBeforeShadow" : "inset 0 2px 5px rgba(0,0,0,.2)"
+      },      
      
       backgroundImage: {
         circlarLight : 'repeating-radial-gradient(#14C2A3 2px, transparent 5px, transparent 100px)'

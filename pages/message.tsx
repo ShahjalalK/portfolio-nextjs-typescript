@@ -17,9 +17,9 @@ const MessageDesboard = (props: Props) => {
   const [user, loading, error] = useAuthState(auth);
 
 
-  const  setAllUserState = useSetRecoilState<allMessageType[]>(allMessageState)
+ 
 
-  const {GetClientMessage} = MessageApi()
+  const {GetClientMessage, getAllUsers} = MessageApi()
 
 
 useEffect(() => {
@@ -28,15 +28,10 @@ useEffect(() => {
   
 
 
-  
+
  
 useEffect(() => {
-  const queryUsers = query(collection(firestore, "users"), orderBy("timestamp", "desc"))
-  onSnapshot(queryUsers, (snapshot) => {
-    setAllUserState(snapshot.docs.map((message : any) => {
-     return {...message.data() }
-   }))
-  })
+  getAllUsers()
 }, [firestore])
 
   return (
