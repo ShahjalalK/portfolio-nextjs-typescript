@@ -1,4 +1,4 @@
-import { subscribeUserState, subscribeUserType } from '@/atom/subscribeUser'
+import { subscribeState, subscribeUserType } from '@/atom/subscribeTypeState'
 import { firestore } from '@/firebase.config'
 import { timeStamp } from 'console'
 import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from 'firebase/firestore'
@@ -6,10 +6,9 @@ import React from 'react'
 import { useSetRecoilState } from 'recoil'
 
 
-const SubscribeApi = () => {
+const SubscribeApi = () => {   
+    const setSubscribe = useSetRecoilState(subscribeState)
     const subscribeRef = collection(firestore, "subscribe")
-    const setSubscribe = useSetRecoilState(subscribeUserState)
-
     const getSubscribeUser = () => {
       onSnapshot(query(subscribeRef, orderBy("timeStamp", "desc")), (snapshot) => {
      

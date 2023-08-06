@@ -1,4 +1,5 @@
 import { type } from "os";
+import { atom } from "recoil";
 
 interface Base{
     _createdAt: string;
@@ -71,6 +72,7 @@ export interface homeSectionType extends Base {
     icon: string,
     ServicePath : string,
     serviceTitle : string,
+    searchDescription : string,
     orderLenth : string ,
     serviceImage : string,
     servicePageName : servicePageNameType[]   
@@ -119,3 +121,22 @@ export interface homeSectionType extends Base {
     imageHeight?:boolean 
 
   }
+
+
+
+ 
+
+  export const allServicState = atom<serviceSectionType[]>({
+    key : "allServiceData",
+    default : []
+  })
+
+  export const basicInfoState = atom<basicInfoType[]>({
+    key : "basicInfoState",
+    default : []
+  })
+
+ 
+
+
+ 

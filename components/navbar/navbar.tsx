@@ -16,6 +16,7 @@ import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import { duration } from "moment";
 import SearchBar from "./searchBar";
 import NavbarMini from "./navbarMini";
+import SearchResult from "./searchResult";
 
 type Props = {};
 
@@ -80,17 +81,32 @@ const Navbar = (props: Props) => {
   
 
 
+  const fadeInAnimationVariants = {
+    initial : {
+      opacity : 0,
+    },
+    animate: (index : number ) => (
+      {
+        opacity : 1,
+        transition : {
+          delay : 0.09 * index,
+          duration : 0.5
+        }
+      }
+    )
+  }
   
 
 
 
   return (
     <header
-      className={`bg-primary/50 transition-all duration-300 ease-in border-b border-white/20 ${
+      className={`bg-primary/50 transition-all duration-300 ease-in border-b border-white/20 z-50 ${
         shadowNave && " shadow-3xl shadow-secoundary !bg-primary/100"
       } ${router.pathname !== "/" && "!bg-primary/100"}`}
     >
       <nav className="container flex flex-grow items-center space-x-10 ">
+        <motion.div initial={{y : -300, opacity : 0}} animate={{y : 0, opacity : 1}} transition={{duration : 1}} className="flex flex-grow lg:flex-grow-0 ">
         <Link href="/" className="flex items-center space-x-1">
           <Image
             src="/coding.png"
@@ -103,15 +119,14 @@ const Navbar = (props: Props) => {
             Shahjalal<span className="text-secoundary">K</span>
           </h3>
         </Link>
+        </motion.div>
         <motion.ul
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1, staggerChildren: 0.08 }}
+         
           className="hidden lg:flex items-center capitalize font-medium text-lg text-white whitespace-nowrap"
         >
 
           {NavbarData.map((item, index) => (
-              <li key={index}>
+              <motion.li variants={fadeInAnimationVariants} initial="initial" animate="animate" custom={index} key={index}>
               {router.pathname !== "/" ? (
                 <Link href={item.path} className="navLink border-l h-[60px] border-white/30 px-5 flex justify-center items-center shadow-chackBoxShadow"> <span>{item.name}</span></Link>
               ) : (
@@ -127,7 +142,7 @@ const Navbar = (props: Props) => {
                  {item.name}
                 </Links>
               )}
-            </li>
+            </motion.li>
           ))}
           
          
@@ -160,6 +175,7 @@ const Navbar = (props: Props) => {
         </motion.ul>
 
         <SearchBar />
+        <SearchResult />
         
         {/* <Link
           href="https://www.fiverr.com/shahjalalk"

@@ -7,7 +7,7 @@ export interface subscribeUserType {
     timestamp : Timestamp
 }
 
-export const subscribeUserState = atom<subscribeUserType[]>({
+export const subscribeState = atom<subscribeUserType[]>({
     key : "subscribeUserState",
     default : [] 
 })

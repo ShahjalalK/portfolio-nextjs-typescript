@@ -7,8 +7,9 @@ import Meta from '@/meta/meta'
 
 import { GetStaticProps } from 'next'
 import React, {useEffect} from 'react'
-import { aboutSectionType, basicInfoType, frontEndSkillsSectionType, homeSectionType, portfolioSectionType, serviceSectionType, testimonialSectionType } from '@/atom/santyType'
+import { aboutSectionType, allServicState, basicInfoState, basicInfoType, frontEndSkillsSectionType, homeSectionType, portfolioSectionType, serviceSectionType, testimonialSectionType } from '@/atom/santyType'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { useRecoilState } from 'recoil'
 
 
 
@@ -25,6 +26,20 @@ type Props = {
 const Home = ({BasicInfoData, homeSectionData, aboutSectionData, testiMonailSectionData, frontEndSkillSectionData, serviceSectionData, portfolioSectionData} : Props) => {
   const {GetClientMessage, getUser} = MessageApi()
   const [user, loading, error] = useAuthState(auth);
+  const [allService, setAllService] = useRecoilState<serviceSectionType[]>(allServicState)
+  const [basicInfo, setBasicInfo] = useRecoilState<basicInfoType[]>(basicInfoState)
+
+  useEffect(() => {
+    setAllService(
+      serviceSectionData
+    )
+   }, [allService])
+
+   useEffect(() => {
+    setBasicInfo(
+      BasicInfoData
+    )
+   }, [basicInfo])
 
 
 useEffect(() => {
@@ -46,7 +61,7 @@ useEffect(() => {
     
       <div className="backgroundIntro relative pb-32">
       
-       <Hero BasicInfoData={BasicInfoData} homeSectionData={homeSectionData} aboutSectionData={aboutSectionData} testiMonailSectionData={testiMonailSectionData} frontEndSkillSectionData={frontEndSkillSectionData} serviceSectionData={serviceSectionData} portfolioSectionData={portfolioSectionData} />
+       <Hero homeSectionData={homeSectionData} aboutSectionData={aboutSectionData} testiMonailSectionData={testiMonailSectionData} frontEndSkillSectionData={frontEndSkillSectionData} portfolioSectionData={portfolioSectionData} />
 
         <video  autoPlay loop muted playsInline className="w-full -z-20 object-cover absolute top-0 left-0  h-full" >
   <source src="video3.mp4" type="video/mp4" /> 

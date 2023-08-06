@@ -1,29 +1,27 @@
-import { allMessageType, messageContentState, messageType, myMessageState, userCookieState, userMessageState } from '@/atom/messageState';
+import { allMessageType, messageContentState, messageType, myMessageState, userMessageState } from '@/atom/messageState';
 import Client from '@/components/my-message-deshboard/client';
 import Login from '@/components/my-message-deshboard/login';
 import Me from '@/components/my-message-deshboard/me';
-import { v4 as uuidv4 } from 'uuid';
 import { auth, firestore } from '@/firebase.config';
-import { addDoc, collection, doc, getDoc, onSnapshot, orderBy, query, serverTimestamp, where } from 'firebase/firestore';
-import { useRouter } from 'next/router';
+import { doc, getDoc} from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { BsFillEmojiSmileFill, BsFillSendFill } from 'react-icons/bs';
 import {ImAttachment} from 'react-icons/im'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import MessageApi from '@/firebaseApi/messageApi';
 import Image from 'next/image';
 import { AiOutlineClose } from 'react-icons/ai';
 import MessageHandlerApi from '@/firebaseApi/messageHandlerApi';
 import Emoji from '@/components/messanger/emoji';
 import {motion} from 'framer-motion'
-import Moment from 'react-moment';
 import AllClient from '@/components/my-message-deshboard/allClient';
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { GetServerSideProps } from 'next';
 import SafeJsonStringfy from 'safe-json-stringify'
-import { parseCookies } from 'nookies';
 import MyMessageHeader from '@/components/my-message-deshboard/myMessageHeader';
 import { Circles } from 'react-loader-spinner';
+import { fetchBasicInfoSection } from '@/untils/fetchSanity';
+import { basicInfoState, basicInfoType } from '@/atom/santyType';
 
 
 
@@ -31,11 +29,12 @@ import { Circles } from 'react-loader-spinner';
 type Props = {
   userData : allMessageType,
   id : string
+  BasicInfoData : basicInfoType[]
 }
 
 
 
-const MessageId = ({userData, id}: Props) => {
+const MessageId = ({userData, id, BasicInfoData}: Props) => {
 
 //   const router = useRouter()
  
@@ -50,6 +49,14 @@ const MessageId = ({userData, id}: Props) => {
   const myMessage = useRecoilValue<messageType[]>(myMessageState)
   
   const [message, setMessage] = useRecoilState(messageContentState)
+  const [basicInfo, setBasicInfo] = useRecoilState<basicInfoType[]>(basicInfoState)
+
+
+  useEffect(() => {
+      setBasicInfo(
+        BasicInfoData
+      )
+     }, [basicInfo])
   
 useEffect(() => {
   setUserState(userData as allMessageType)
@@ -247,16 +254,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const id = ctx.query.pid as string
   const userDocRef = doc(firestore, "users", id)  
   const userData = await getDoc(userDocRef)
+  const BasicInfoData = await fetchBasicInfoSection()
  
   return { props: {
     userData : userData.exists() ? JSON.parse(SafeJsonStringfy({id: userData.id, ...userData.data()})) : "",
-    id
+    id,
+    BasicInfoData
     } }
 }
 
 
 export default MessageId
-
-
-
- 

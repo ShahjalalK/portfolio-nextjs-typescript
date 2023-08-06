@@ -7,24 +7,38 @@ import { auth, firestore } from '@/firebase.config'
 import MessageApi from '@/firebaseApi/messageApi'
 import Meta from '@/meta/meta'
 import { GetServerSideProps, GetServerSidePropsContext, GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
-import { fetchServiceSectionSection } from '@/untils/fetchSanity'
+import { fetchBasicInfoSection, fetchServiceSectionSection } from '@/untils/fetchSanity'
 import { groq } from 'next-sanity'
 import { client } from '@/lib/sanity.client'
-import { serviceSectionType } from '@/atom/santyType'
+import { allServicState, basicInfoState, basicInfoType, serviceSectionType } from '@/atom/santyType'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
 type Props = {
   service : serviceSectionType,
   allServiceData : serviceSectionType[],
-  slugId : string
+  slugId : string,
+  BasicInfoData : basicInfoType[];
 }
 
 
 
-const ServiceId = ({service, allServiceData, slugId}: Props) => {
+const ServiceId = ({BasicInfoData, service, allServiceData, slugId}: Props) => {
     const {GetClientMessage, getUser} = MessageApi()
     const [user, loading, error] = useAuthState(auth);
-   
+    const [allService, setAllService] = useRecoilState<serviceSectionType[]>(allServicState)
+    const [basicInfo, setBasicInfo] = useRecoilState<basicInfoType[]>(basicInfoState)
+ 
+    useEffect(() => {
+    setBasicInfo(
+      BasicInfoData
+    )
+   }, [basicInfo])
+   useEffect(() => {
+    setAllService(
+      allServiceData
+    )
+   }, [allService])
 
   useEffect(() => {
     GetClientMessage()
@@ -49,7 +63,7 @@ useEffect(() => {
       
       </div> 
       <hr className="text-primary/25" />
-      <MoreServices allServiceData={allServiceData} slugId={slugId} />
+      <MoreServices slugId={slugId} />
   </section>
   )
 }
@@ -70,7 +84,8 @@ export const getServerSideProps : GetServerSideProps = async (context : GetServe
  const service = await client.fetch(query, {slugId})
 
  const allServiceData = await fetchServiceSectionSection()
-  
-  // const serviceSectionData = await fetchServiceSectionSection()
-  return { props: { service, allServiceData, slugId } }
+ const BasicInfoData = await fetchBasicInfoSection()
+ 
+  return { props: {BasicInfoData, service, allServiceData, slugId } }
 }
+

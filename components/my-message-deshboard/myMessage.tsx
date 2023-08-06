@@ -8,7 +8,7 @@ type Props = {}
 const MyMessage = (props: Props) => {
   const [allUser, setAllUserState] = useRecoilState(allMessageState)
   const [search, setSearch] = useState<string>("")
-  const [filterUser, setFilterUser] = useState<messageType[]>([])
+  const [filterUser, setFilterUser] = useState([])
 
   const handleSearch = () => {
     if(search !== ''){
@@ -45,8 +45,8 @@ const MyMessage = (props: Props) => {
 
        :
        <>
-       {filterUser.map((messageUser) => (
-         <MessageItem key={messageUser.id} messageUser={messageUser} />
+       {filterUser.map((messageUser, index) => (
+         <MessageItem key={index} messageUser={messageUser} />
        ) )}
        </>
       

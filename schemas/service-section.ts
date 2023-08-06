@@ -38,6 +38,11 @@ export const ServiceSectionSchema: SchemaTypeDefinition = {
               maxLength: 200,
               
             }
+          }, 
+          {
+            title: 'Search Description',
+            name: 'searchDescription',
+            type: 'text'            
           },     
        
         {

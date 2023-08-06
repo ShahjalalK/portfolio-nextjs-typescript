@@ -12,6 +12,7 @@ import { allMessageType, clientMessageState, messageContentState, messageSignupS
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import HelloMessage from "./helloMessage";
 import Emoji from "./emoji";
+import FirstMessage from "./firstMessage";
 
 
 type Props = {};
@@ -46,7 +47,7 @@ const shwoFunc = async (showMessage : boolean) => {
       }
      
      
-    }, 5000);
+    }, 10000);
     return () => clearTimeout(messageOpen);
   }, []);
 
@@ -83,7 +84,8 @@ const shwoFunc = async (showMessage : boolean) => {
               </>
             )
           })}
-         
+          {userCooke.email &&  cookeValue.email  &&   <FirstMessage />}
+        
           <HelloMessage />
           
         

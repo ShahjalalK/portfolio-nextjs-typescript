@@ -58,7 +58,7 @@ const AllClient = ({userId}: Props) => {
        :
        <>
        {filterUser.map((messageUser) => (
-         <UserClient key={messageUser.id} messageUser={messageUser} userId={userId} />
+         <UserClient key={messageUser.id} messageUser={messageUser as any} userId={userId} />
        ) )}
        </>
       

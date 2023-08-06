@@ -8,19 +8,20 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import Link from "next/link";
 
 import { motion } from "framer-motion";
-import { serviceSectionType } from "@/atom/santyType";
+import { allServicState, serviceSectionType } from "@/atom/santyType";
 import ServiceId from "@/pages/service/[slug]";
+import { useRecoilState } from "recoil";
 
-type Props = {
-  
-  allServiceData : serviceSectionType[],
+type Props = { 
+ 
   slugId : string
   
 }
 
-const MoreServices = ({allServiceData, slugId}: Props) => {
+const MoreServices = ({slugId}: Props) => {
 
-
+  const [allService, setAllService] = useRecoilState<serviceSectionType[]>(allServicState)
+  
 
     const slideRef = useRef<any>()
 
@@ -56,7 +57,7 @@ const MoreServices = ({allServiceData, slugId}: Props) => {
         >
 
           {
-            allServiceData.filter(item => item.ServicePath !== slugId).map((service, index) => (
+            allService.filter(item => item.ServicePath !== slugId).map((service, index) => (
               <SwiperSlide key={index}>
              <motion.div initial={{y : 100}} whileInView={{y : 0}} transition={{duration : 0.5}} viewport={{once : true}}>
              <Link href={`/service/${service.ServicePath}`} className="group" >

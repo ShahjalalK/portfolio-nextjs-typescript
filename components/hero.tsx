@@ -13,17 +13,16 @@ type Props = {
   homeSectionData : homeSectionType[];
   aboutSectionData : aboutSectionType[];
   testiMonailSectionData : testimonialSectionType[];
-  frontEndSkillSectionData : frontEndSkillsSectionType[];
-  serviceSectionData : serviceSectionType[];
+  frontEndSkillSectionData : frontEndSkillsSectionType[];  
   portfolioSectionData : portfolioSectionType[]
-  BasicInfoData : basicInfoType[]
+  
 }
 
-const Hero = ({BasicInfoData, homeSectionData, aboutSectionData, testiMonailSectionData, frontEndSkillSectionData, serviceSectionData, portfolioSectionData}: Props) => {
+const Hero = ({homeSectionData, aboutSectionData, testiMonailSectionData, frontEndSkillSectionData, portfolioSectionData}: Props) => {
   return (
     <div className="container z-50  items-start grid grid-cols-1 lg:grid-cols-3 gap-5">
          <div className="col-span-1 lg:sticky top-[100px] mt-24 lg:mt-0">
-            <ProfileCard BasicInfoData={BasicInfoData} />
+            <ProfileCard />
         </div>       
 
         <div className="col-span-1 lg:col-span-2 lg:mx-16 ">
@@ -32,7 +31,7 @@ const Hero = ({BasicInfoData, homeSectionData, aboutSectionData, testiMonailSect
              <About aboutSectionData={aboutSectionData} testiMonailSectionData={testiMonailSectionData}/>
              
              <Skills frontEndSkillSectionData={frontEndSkillSectionData} />
-             <Services serviceSectionData={serviceSectionData} />
+             <Services />
              <Portfolio portfolioSectionData={portfolioSectionData} />              
              <Contact />          
         </div>

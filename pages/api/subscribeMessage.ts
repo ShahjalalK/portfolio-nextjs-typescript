@@ -6,6 +6,7 @@ const SibApiV3Sdk = require('sib-api-v3-typescript');
 
 type Data = {
     message : string
+    
 }
 const handler = async (
   req: NextApiRequest,
@@ -28,7 +29,9 @@ const handler = async (
     apiInstance.createContact(createContact).then(function(data : any) {
         res.status(200)
         res.status(200).json({message : "Thank you for submiting!"})
-    }, function(error : any) {
+    }, function(error : any) { 
+      res.status(400)
+      res.status(400).json({message : "Thank you for submiting!"})
       console.error(error);
     });
 }
