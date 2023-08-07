@@ -29,7 +29,11 @@ const Signup = (props: Props) => {
 
       if(!email || !name) return
 
+      
+
       setLoading(true)
+
+      
 
      Cookies.set("user", JSON.stringify({
         email,
@@ -57,7 +61,7 @@ const Signup = (props: Props) => {
         id,
         timestamp : serverTimestamp() as any
        })
-      //  location.reload()
+     
       
       setLoading(false)
     }
@@ -81,14 +85,18 @@ const Signup = (props: Props) => {
 
    
    
+   
   return (
-    <motion.form initial={{opacity : 0, y: -100}} animate={{opacity : messageSignupValue.open ? 1 : 0, y : messageSignupValue.open ? 0 : -100}} transition={{duration : 0.5}} onSubmit={submitHandler} className={` max-w-xs bg-[transparent] p-1 border border-white/30 rounded  flex-col space-y-3  ${messageSignupValue.open ? "flex" : "hidden"} `}>
-    <div>
-    <p className="text-sm text-white/60 font-Roboto">Hey there, please leave your details so we can contact you even if you are no longer on the site.</p>
-    </div>
-     <input value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder='Name' className="w-full p-1 placeholder:text-sm text-sm text-white/80 bg-[transparent] border-b border-b-white/30 focus:outline-none font-thin" required /> 
-     <input value={email} onChange={(e) => setEmail(e.target.value)} type="Email" placeholder='Email'  className="w-full p-1 placeholder:text-sm text-white/80 bg-[transparent] border-b border-b-white/30 focus:outline-none font-thin text-sm" required />
-     <button type='submit'  className="text-white/50 px-5 py-1 rounded font-thin text-sm hover:text-secoundary flex items-center justify-center">{loading ? <ThreeDots 
+    <motion.div  initial={{opacity : 0, y: -100}} animate={{opacity : messageSignupValue.open ? 1 : 0, y : messageSignupValue.open ? 0 : -100}} transition={{duration : 0.5}} className={` ${messageSignupValue.open ? "flex" : "hidden"}`} >
+      <div className="messageContactBox"> 
+      <span className='borderLine'></span>       
+      <form  onSubmit={submitHandler}>
+    
+      <input value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder='Name' required /> 
+     
+    <input value={email} onChange={(e) => setEmail(e.target.value)} type="Email" placeholder='Email'  required />
+     
+     <button type='submit' className={`${name && email && "active"}`}>{loading ? <ThreeDots 
 height="15" 
 width="45" 
 radius="9"
@@ -97,7 +105,9 @@ ariaLabel="three-dots-loading"
 wrapperStyle={{}}
 visible={true}
  /> : "Submit"} </button>
-  </motion.form>
+  </form>
+    </div>
+    </motion.div>
   )
 }
 

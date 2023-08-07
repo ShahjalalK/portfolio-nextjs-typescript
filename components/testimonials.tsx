@@ -53,7 +53,7 @@ const Testimonials = (testiMonailSectionData: Props) => {
         
         
       >
-        <motion.div initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}}  className=" absolute top-0 md:right-0 z-10 hidden md:flex items-center space-x-2 ">
+        <motion.div initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}}  className=" absolute top-0 right-0 z-10 flex items-center space-x-2 ">
           <button onClick={prevSlide} className="text-2xl text-white/50 hover:text-secoundary/80 border border-white/50 hover:border-secoundary/80 w-9 h-9 flex justify-center items-center rounded-full"><AiOutlineLeft /></button>
           {/* <span className="swiper-paginations text-sm !text-white/30 font-normal !inline-flex [&>*:first-child]:!text-white/75 "></span> */}
           <button onClick={nextSlide} className="text-2xl text-white/50 hover:text-secoundary/80 border border-white/50 hover:border-secoundary/80 w-9 h-9 flex justify-center items-center rounded-full"><AiOutlineRight /></button>
@@ -62,17 +62,16 @@ const Testimonials = (testiMonailSectionData: Props) => {
 
        {testiMonailSectionData.testiMonailSectionData.map((item) => (
           <SwiperSlide key={item._id} >
-          <div className="flex flex-col space-y-2 pt-11">
-          <div className="border border-white/30 p-10 rounded ">
-         <div className="flex flex-col space-y-1 lg:flex-row items-center justify-between">
+          <div className="border border-white/30 mt-10 p-3 md:p-8 rounded ">
+         <div className="flex flex-col space-y-1 lg:flex-row md:items-center justify-between">
          <motion.div initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}} className="flex items-center space-x-3">
-              <Image src={item.clientImage} alt="testimonial" width={50} height={50} className=" rounded-full border object-cover"/>
+         <Image src={item.clientImage} alt="testimonial" width={50} height={50} className=" rounded-full border border-white/50 object-cover"/>
               <div className="flex flex-col space-y-1">
                 <h3 className="text-white text-lg">{item.name}</h3>
                 <p className="text-white/75 text-xs">{item.title} of <span className=" text-secoundary">{item.companyName}</span></p>
               </div>
             </motion.div>
-          <motion.div initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}} className="text-2xl text-[#ffe234] flex items-start justify-between">
+          <motion.div initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}} className="text-2xl text-[#ffe234]/90 flex items-start md:justify-between">
                       
               <AiFillStar />
               <AiFillStar />
@@ -82,16 +81,14 @@ const Testimonials = (testiMonailSectionData: Props) => {
               
             </motion.div>
          </div>
-            <motion.div initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}} className="text-xl text-white py-5 lg:py-10 flex flex-col space-y-1 md:flex-row items-start flex-grow space-x-1 ml-10">
-             <div> <FaQuoteRight className="text-4xl text-white/30" /></div>
+            <motion.div initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}} className="text-xl text-white pt-5 lg:pt-8 flex flex-row items-start flex-grow space-x-1 ml-2 md:ml-10">
+             <div> <FaQuoteRight className="text-4xl text-white/25" /></div>
               <p className=" flex-grow text-base text-white/90"> {item.review}</p>
            
             </motion.div>
             
             
             
-          </div>
-          
           </div>
       </SwiperSlide>
        ))}

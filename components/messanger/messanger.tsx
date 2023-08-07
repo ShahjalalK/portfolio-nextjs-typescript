@@ -13,6 +13,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import HelloMessage from "./helloMessage";
 import Emoji from "./emoji";
 import FirstMessage from "./firstMessage";
+import ContactMessage from "./contactMessage";
 
 
 type Props = {};
@@ -63,7 +64,7 @@ const shwoFunc = async (showMessage : boolean) => {
         <MessageHeader />
         <div className="w-full h-[350px] md:h-[400px] mb-10  bg-[#1b2137] overflow-y-auto overflow-x-hidden flex flex-col space-y-4 p-3 py-5 border border-primary ">
        
-        {!userCooke.email &&  !cookeValue.email  &&  <Signup />}
+        
         
        
         
@@ -84,8 +85,10 @@ const shwoFunc = async (showMessage : boolean) => {
               </>
             )
           })}
-          {userCooke.email &&  cookeValue.email  &&   <FirstMessage />}
-        
+          {userCooke.email &&   <FirstMessage />}
+          <ContactMessage />
+        {!userCooke.email &&  !cookeValue.email  &&  <Signup />}
+      
           <HelloMessage />
           
         

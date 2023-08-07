@@ -105,7 +105,7 @@ const Navbar = (props: Props) => {
         shadowNave && " shadow-3xl shadow-secoundary !bg-primary/100"
       } ${router.pathname !== "/" && "!bg-primary/100"}`}
     >
-      <nav className="container flex flex-grow items-center space-x-10 ">
+      <nav className="container flex flex-grow items-center space-x-10 py-3 lg:py-0 ">
         <motion.div initial={{y : -300, opacity : 0}} animate={{y : 0, opacity : 1}} transition={{duration : 1}} className="flex flex-grow lg:flex-grow-0 ">
         <Link href="/" className="flex items-center space-x-1">
           <Image
