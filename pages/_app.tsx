@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
       setLoading(true)
       setTimeout(() => {
         setLoading(false)
-      }, 5000)
+      }, 3000)
   }, [])
   return (
     <RecoilRoot>
