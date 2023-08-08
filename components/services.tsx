@@ -14,7 +14,7 @@ type Props = {
 
 const Services = ({}: Props) => {
   const [allService, setAllService] = useRecoilState<serviceSectionType[]>(allServicState)
-  console.log(allService)
+ 
   const router = useRouter()
 
  

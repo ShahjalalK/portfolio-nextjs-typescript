@@ -22,7 +22,7 @@ type Props = {
 
 
 const About = ({aboutSectionData, testiMonailSectionData}: Props) => {
-  console.log(aboutSectionData[0].uploadCV)
+ 
   return (
     <motion.section initial={{opacity : 1}} whileInView={{opacity : 1}} transition={{delay : 0.5, staggerChildren : 0.08}} id="about" className="section-padding">
     <motion.span initial={{opacity : 0, y:50}} whileInView={{opacity : 1, y : 0}} transition={{duration : 0.3, delay : 0.5}} className="rounded-full mb-10 border border-white/50 text-white/50 px-3 py-1 text-sm inline-flex items-center space-x-1"><AiOutlineUser className="text-lg text-secoundary/75" /> <span className="text-sm uppercase">About</span></motion.span>
