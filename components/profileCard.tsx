@@ -35,7 +35,7 @@ const ProfileCard = ({}: Props) => {
             </span> 
             </p>
       </div>
-      <Image src={item.myImage} alt='me' width={350} height={350} className=" rounded-3xl my-5 mx-auto w-60" />
+      <Image src={item.myImage ? item.myImage : `/myPhoto.webp`} alt='me' width={350} height={350} className=" rounded-3xl my-5 mx-auto w-60" />
       <div className="text-white mt-5 justify-center flex flex-col text-center text-xl">
           <h3 className="text-sm text-white/75"><Link href={`mailto:${item.email}`} className="">{item.email}</Link></h3>
           <h2 className="text-lg md:text-xl">Kushtia, Dhaka, Bangladesh</h2>

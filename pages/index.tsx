@@ -10,6 +10,7 @@ import React, {useEffect} from 'react'
 import { aboutSectionType, allServicState, basicInfoState, basicInfoType, frontEndSkillsSectionType, homeSectionType, portfolioSectionType, serviceSectionType, testimonialSectionType } from '@/atom/santyType'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRecoilState } from 'recoil'
+import UserTrakingApi from '@/firebaseApi/userTrakingApi'
 
 
 
@@ -54,6 +55,12 @@ useEffect(() => {
   
 }, [firestore])
 
+
+const {userTarkings} = UserTrakingApi()
+
+useEffect(() => {
+ userTarkings()    
+}, [])
 
   return (
     <div>

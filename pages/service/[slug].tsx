@@ -13,6 +13,7 @@ import { client } from '@/lib/sanity.client'
 import { allServicState, basicInfoState, basicInfoType, serviceSectionType } from '@/atom/santyType'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRecoilState, useSetRecoilState } from 'recoil'
+import UserTrakingApi from '@/firebaseApi/userTrakingApi'
 
 type Props = {
   service : serviceSectionType,
@@ -53,8 +54,14 @@ useEffect(() => {
   
 }, [firestore])
 
+const {userTarkings} = UserTrakingApi()
+
+useEffect(() => {
+  userTarkings()    
+}, [])
+
   return (
-    <section className="section-padding font-Roboto">
+    <section className=" pt-20 font-Roboto">
     <Meta title='Clickable email signature' /> 
      <div className="grid container grid-cols-1 lg:grid-cols-3 gap-10">
       {/* <h1>MyId:-{slugId}</h1> */}

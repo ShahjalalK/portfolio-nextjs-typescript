@@ -21,7 +21,7 @@ const Lavel = (props: Props) => {
       />
       <div className="flex flex-col">
         <h4 className="text-lg font-bold text-info/90"><Link href="https://www.fiverr.com/shahjalalk" target="_blank" >Shahjalal Khan</Link></h4>
-        <p className="text-sm"><span>Level 1 Seller of</span> <Link href="https://www.fiverr.com/shahjalalk" target="_blank" className="group-hover:underline group-hover:text-[#1DBF73]">Fiverr.com</Link></p>
+        <p className="text-sm"><span>Level 1 Seller of</span> <Link href="https://www.fiverr.com/shahjalalk" target="_blank" className="group-hover:underline text-[#1DBF73]">Fiverr.com</Link></p>
       </div>
     </div>
     ))}

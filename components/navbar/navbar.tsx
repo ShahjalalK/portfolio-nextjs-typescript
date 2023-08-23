@@ -7,25 +7,28 @@ import {
   animateScroll as scroll,
 } from "react-scroll";
 import { motion } from "framer-motion";
-import { AiOutlineClose, AiTwotoneHome } from "react-icons/ai";
 import { useRouter } from "next/router";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from "@/firebase.config";
 import { signOut } from "firebase/auth";
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
-import { duration } from "moment";
 import SearchBar from "./searchBar";
 import NavbarMini from "./navbarMini";
 import SearchResult from "./searchResult";
+
+
 
 type Props = {};
 
 const Navbar = (props: Props) => {
   const [showadmin, setShowAdmin] = useState(false)
- 
+
+  
   const [shadowNave, setShadowNave] = useState(false);
   const [user, loading, error] = useAuthState(auth);
   const router = useRouter();
+  
+  
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -154,18 +157,22 @@ const Navbar = (props: Props) => {
              {showadmin ? <BiCaretUp /> : <BiCaretDown />} 
             </li>
               <motion.div initial={{right : 0, width : 0}} animate={{right : showadmin ? 50 : 0, width : showadmin ? "400px" : 0}} transition={{duration : 0.5, delayChildren: 0.5}} className="fixed right-10 w-[400px] top-[80px] flex flex-col space-y-2">
-              <Link href="/studio"className={` hover:text-secoundary/75  px-2 py-1 bg-primary rounded-md text-white/70 ${router.pathname == "/studio/desk" && "!text-secoundary/75"}`} onClick={() => setShowAdmin(false)}>
+              <Link href="/studio"className={` hover:text-secoundary/75 shadow-md  px-2 py-1 bg-primary rounded-md text-white/70 ${router.pathname == "/studio/desk" && "!text-secoundary/75"}`} onClick={() => setShowAdmin(false)}>
                    Studio
                   </Link>
-                  <Link href="/message" className={` hover:text-secoundary/75  px-2 py-1 bg-primary rounded-md text-white/70 ${router.pathname == "/message" && "!text-secoundary/75"}`} onClick={() => setShowAdmin(false)}>
+                  <Link href="/message" className={` hover:text-secoundary/75 shadow-md  px-2 py-1 bg-primary rounded-md text-white/70 ${router.pathname == "/message" && "!text-secoundary/75"}`} onClick={() => setShowAdmin(false)}>
                    Message
                   </Link>
              
-                  <Link href="/subscribe" className={` hover:text-secoundary/75  px-2 py-1 bg-primary rounded-md text-white/70 ${router.pathname == "/subscribe" && "!text-secoundary/75"}`} onClick={() => setShowAdmin(false)}>
+                  <Link href="/subscribe" className={` hover:text-secoundary/75 shadow-md  px-2 py-1 bg-primary rounded-md text-white/70 ${router.pathname == "/subscribe" && "!text-secoundary/75"}`} onClick={() => setShowAdmin(false)}>
                    Subscribe
                   </Link>
 
-              <button onClick={() => signOut(auth)} className=" hover:text-secoundary/75  px-2 py-1 bg-primary rounded-md text-white/70">
+                  <Link href="/usertraking" className={` hover:text-secoundary/75 shadow-md  px-2 py-1 bg-primary rounded-md text-white/70 ${router.pathname == "/usertraking" && "!text-secoundary/75"}`} onClick={() => setShowAdmin(false)}>
+                   User Traking
+                  </Link>
+
+              <button onClick={() => signOut(auth)} className=" hover:text-secoundary/75 shadow-md  px-2 py-1 bg-primary rounded-md text-white/70">
                    Logout
                   </button>
               </motion.div>

@@ -87,7 +87,7 @@ const MessangerForm = ({showEmoji, setShowEmoji}: Props) => {
       }
      
       
-                <div className="flex items-end flex-grow space-x-3 bg-primary z-50">
+                <div className="flex items-end flex-grow space-x-3 bg-primary z-50 pt-1">
                 <textarea style={messageHeight ? { height : `${messageHeight}px`} : { height : `${messageHeight}px`} } value={messageState.content}  placeholder="Write Message..." className="text-sm flex-grow bg-[transparent]  focus:outline-none max-h-28 min-h-[20px]  resize-none text-white " rows={1} onKeyUp={onKeyPressHandle} onChange={chageHandlerMessage} ></textarea>
                <div className="flex items-center space-x-3 ">
                 {showEmoji ?
