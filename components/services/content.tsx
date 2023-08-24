@@ -10,17 +10,20 @@ import GigSlider from "./gigSlider";
 import Description from "./description";
 import Lavel from "./lavel";
 import { MediaType } from "@/atom/serviceType";
-import { GigsType } from "@/atom/santyType";
+import { GigsType, testimonialSectionType } from "@/atom/santyType";
+import Testimonials from "../testimonials";
+import ReviewClient from "./reviewClient";
 
 
 type Props = {
   title: string,
   Media : GigsType[],
-  description : any
+  description : any,
+  testiMonailSectionData : testimonialSectionType[]
   
 };
 
-const Content = ({title, Media, description}: Props) => {
+const Content = ({title, Media, description, testiMonailSectionData}: Props) => {
   
 
   const slideRef = useRef<any>()
@@ -49,7 +52,9 @@ const Content = ({title, Media, description}: Props) => {
             <button onClick={nextSlide} className="text-2xl bg-white rounded-full p-2 shadow-2xl shadow-primary/80 text-[#222] hover:text-secoundary transition-all duration-300 md:-mr-5"><AiOutlineRight /></button>
           </div>
       </div>
-     
+      <div className="my-5 md:w-[90%] relative border border-primary/20">
+      <ReviewClient testiMonailSectionData={testiMonailSectionData} />
+      </div>
 
       <Description description={description} />
 

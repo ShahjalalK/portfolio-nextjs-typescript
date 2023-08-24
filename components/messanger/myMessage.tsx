@@ -17,7 +17,7 @@ const MmyMessage = ({item}: Props) => {
     {basicInfoValue.slice(0, 1).map((me) => (
          <div key={me._id} className=" flex justify-start items-start flex-col space-y-1 rounded">
                    
-         <div className="whitespace-normal text-sm bg-[#D9D9D7]/10 p-2 rounded-r-md rounded-tl-md ml-5 font-normal text-white border border-white/30 flex flex-col space-y-1">
+         <div className="whitespace-normal text-sm bg-[#D9D9D7]/10 p-2 rounded-r-md rounded-tl-md ml-5 font-normal text-white border border-white/30 flex flex-col space-y-1 max-w-xs">
         <p> {item.message}</p>
           {item.media && <div className="cursor-pointer">
           <Link href={item.media} download={true} target="_blank"><Image src={item.media} alt={item.name} width={350} height={350} className="w-32 h-auto"/></Link>

@@ -71,7 +71,7 @@ const Footer = (props: Props) => {
 
  
   return (
-    <motion.footer initial={{y : "100%"}} whileInView={{y : 0}} transition={{duration : 0.5, delay : 0.3}} viewport={{once : true}} className="bg-primary ">
+    <footer className="bg-primary ">
       <div className=" relative flex flex-col space-y-10 justify-center py-10 md:py-32 overflow-hidden">
       <Image
           src="/Pattern.png"
@@ -154,7 +154,7 @@ const Footer = (props: Props) => {
 
       </div>
       
-    </motion.footer>
+    </footer>
   );
 };
 

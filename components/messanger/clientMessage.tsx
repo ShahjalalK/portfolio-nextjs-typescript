@@ -10,8 +10,8 @@ type Props = {
 
 const ClientMessage = ({item}: Props) => {
   return (
-    <div className=" flex justify-end items-end flex-col space-y-1 ">
-      <div className="text-sm bg-secoundary/10 text-white p-2 rounded-l-md rounded-tr-md mr-5 font-normal border border-white/30 flex flex-col space-y-1 justify-end items-end">
+    <div className=" flex justify-end items-end flex-col space-y-1">
+      <div className="text-sm bg-secoundary/10 text-white p-2 rounded-l-md rounded-tr-md mr-5 font-normal border border-white/30 flex flex-col space-y-1 justify-end items-end max-w-xs">
         <p>{item.message}</p>
         {item.media && <div >
           <Link href={item.media} target="_blank" download={true}><Image src={item.media} alt={item.name} width={350} height={350} className="w-32 h-auto"/></Link>
