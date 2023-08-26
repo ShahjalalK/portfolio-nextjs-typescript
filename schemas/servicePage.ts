@@ -64,12 +64,6 @@ export const servicePageSchema: SchemaTypeDefinition = {
             }
           }
         ]
-    },
-    {
-        name : "pricingName",
-        title : "Priching",
-        type : "array",
-        of : [{ type : "reference", to : [{type : "pricing"}]}]
     }
   ],
 };

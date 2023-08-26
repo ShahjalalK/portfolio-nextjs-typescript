@@ -1,4 +1,4 @@
-import { messageContentState, messageContentType} from '@/atom/messageState'
+import { messageContentState, messageContentType, messageOpenSate, messageOpenType} from '@/atom/messageState'
 import MessageHandlerApi from '@/firebaseApi/messageHandlerApi'
 
 
@@ -8,6 +8,8 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { BsEmojiSmile, BsFillEmojiSmileFill, BsFillSendFill } from 'react-icons/bs'
 import { RiAttachment2 } from 'react-icons/ri'
 import { useRecoilState} from 'recoil'
+import ServiceMessageText from './serviceMessageText'
+import { servicMessageState, serviceMessageType } from '@/atom/santyType'
 
 
 
@@ -18,8 +20,8 @@ type Props = {
 
 const MessangerForm = ({showEmoji, setShowEmoji}: Props) => {
   const {messageHandler, emailHandler} = MessageHandlerApi()
-
-
+const [messageOpen, setMessageOpen] = useRecoilState<messageOpenType>(messageOpenSate)
+const [serviceMessage, setServiceMessage] = useRecoilState<serviceMessageType>(servicMessageState)
   const [messageState, setMessageState] = useRecoilState<messageContentType>(messageContentState)
 
   const [messageHeight, setMessageHeight] = useState<string | number>();
@@ -79,6 +81,7 @@ const MessangerForm = ({showEmoji, setShowEmoji}: Props) => {
   
   return (
     <form className=" absolute bottom-0 left-0 right-0 w-full  bg-primary  shadow shadow-secoundary p-3  border-t border-t-secoundary/30" onSubmit={submitHandler}>
+    {messageOpen.gigLink && serviceMessage && <ServiceMessageText />}  
       {messageState.previewImage && 
         <div className="rounded py-1 w-32 h-20 overflow-x-hidden overflow-y-scroll relative object-contain z-10">
         <Image src={messageState.previewImage} width={500} height={500} alt='content' className="w-32 object-fill"/>

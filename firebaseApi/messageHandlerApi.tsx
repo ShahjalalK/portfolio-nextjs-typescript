@@ -1,10 +1,11 @@
-import { allMessageState, allMessageType, messageContentState, messageContentType, messageSignupState, messageSignupType, userCookieState, userMessageState } from '@/atom/messageState'
+import { allMessageState, allMessageType, messageContentState, messageContentType, messageOpenSate, messageOpenType, messageSignupState, messageSignupType, userCookieState, userMessageState } from '@/atom/messageState'
+import { servicMessageState, serviceMessageType } from '@/atom/santyType'
 import { firestore, storage } from '@/firebase.config'
 import { addDoc, collection, doc, serverTimestamp, updateDoc } from 'firebase/firestore'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { parseCookies } from 'nookies'
 import React from 'react'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
 
 
@@ -18,6 +19,10 @@ const MessageHandlerApi = () => {
     const userCooke = cookie.user ? JSON.parse(cookie.user) : ""
 
 const [messageState, setMessageState] = useRecoilState<messageContentType>(messageContentState)
+const [serviceMessage, setServiceMessage] = useRecoilState<serviceMessageType>(servicMessageState)
+const setMessageOpen = useSetRecoilState<messageOpenType>(messageOpenSate)
+
+const resateServiceMessage = useResetRecoilState(servicMessageState)
 
 const userValue = useRecoilValue<allMessageType>(userMessageState)
     const messageRef = collection(firestore, "users", `${cookeValue.id ? cookeValue.id : userCooke.id}`, "message")
@@ -75,6 +80,10 @@ const userValue = useRecoilValue<allMessageType>(userMessageState)
               message : messageState.content,
               media : "",
               id : cookeValue.id ? cookeValue.id : userCooke.id,
+              serviceTitle : serviceMessage.serviceTitle,
+              searchDescription : serviceMessage.searchDescription,   
+              serviceImage : serviceMessage.serviceImage,
+              orderLink : serviceMessage.orderLink
              })
         
              if(messageState.previewImage){
@@ -129,8 +138,8 @@ const userValue = useRecoilValue<allMessageType>(userMessageState)
 
               setMessageHeight("20px");
 
-
-              
+              setMessageOpen((prev) => ({...prev, gigLink : false}))
+              resateServiceMessage()
             
           } catch (error : any) {
             console.log(error.message)

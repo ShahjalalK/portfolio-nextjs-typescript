@@ -8,7 +8,7 @@ import ClientMessage from "./clientMessage";
 import MessageHeader from "./messageHeader";
 import Signup from "./signup";
 import {parseCookies} from 'nookies'
-import { allMessageType, clientMessageState, messageContentState, messageSignupState, userCookieState } from "@/atom/messageState";
+import { allMessageType, clientMessageState, messageContentState, messageOpenSate, messageOpenType, messageSignupState, userCookieState } from "@/atom/messageState";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import HelloMessage from "./helloMessage";
 import Emoji from "./emoji";
@@ -20,7 +20,8 @@ type Props = {};
 
 const Messanger = (props: Props) => {
   const messageValue = useRecoilValue(clientMessageState)
-  const [showMessage, setShowMessage] = useState<boolean>(false);
+  const [messageOpen, setMessageOpen] = useRecoilState<messageOpenType>(messageOpenSate)
+ 
 
 
   const [cookeValue, setCookeValue] = useRecoilState<allMessageType>(userCookieState)
@@ -36,20 +37,23 @@ const shwoFunc = async (showMessage : boolean) => {
   const audio = new Audio()
   audio.src = "/message.wav"
   audio.autoplay = true
-  setShowMessage(true);
+  setMessageOpen((prev) => ({
+    ...prev,
+    open : true
+  }))
    
 }
 
 
   useEffect(() => {
-    let messageOpen = setTimeout(() => { 
-      if(showMessage === false ){
-        shwoFunc(showMessage)
+    let messageOpens = setTimeout(() => { 
+      if(messageOpen.open === false ){
+        shwoFunc(messageOpen.open)
       }
      
      
     }, 10000);
-    return () => clearTimeout(messageOpen);
+    return () => clearTimeout(messageOpens);
   }, []);
 
   return (
@@ -57,7 +61,7 @@ const shwoFunc = async (showMessage : boolean) => {
       
       <motion.div
         initial={{ display: "none" }}
-        animate={{ display: showMessage ? "block" : "none" }}
+        animate={{ display: messageOpen.open ? "block" : "none" }}
         transition={{ duration: 0.5 }}
         className="rounded-xl shadow-2xl shadow-secoundary w-[340px] md:w-[400px] overflow-hidden relative"
       >
@@ -104,23 +108,42 @@ const shwoFunc = async (showMessage : boolean) => {
         <MessangerForm showEmoji={showEmoji} setShowEmoji={setShowEmoji} />
       </motion.div>
 
-      <motion.div
-          onClick={() => setShowMessage(!showMessage)}
-          initial={{ scale: 1 }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          className="w-12 h-12 rounded-full bg-primary border-2 border-white/80 shadow-2xl shadow-secoundary relative cursor-pointer "
-        >
-          {showMessage ? (
-            <LiaAngleDownSolid
-              color="white"
-              fill="#fff"
-              className="text-white file:text-white text-2xl absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]"
-            />
-          ) : (
-            <AiOutlineMessage className="text-white  text-2xl absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]" />
-          )}
-        </motion.div>
+{messageOpen.open ? (
+
+<motion.div
+onClick={() => setMessageOpen((prev) => ({...prev,  open : false}))}
+initial={{ scale: 1 }}
+whileHover={{ scale: 1.1 }}
+whileTap={{ scale: 0.9 }}
+className="w-12 h-12 rounded-full bg-primary border-2 border-white/80 shadow-2xl shadow-secoundary relative cursor-pointer "
+>
+
+  <LiaAngleDownSolid
+    color="white"
+    fill="#fff"
+    className="text-white file:text-white text-2xl absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]"
+  />
+
+</motion.div>
+
+) : (
+
+  <motion.div
+  onClick={() => setMessageOpen((prev) => ({...prev,  open : true}))}
+  initial={{ scale: 1 }}
+  whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.9 }}
+  className="w-12 h-12 rounded-full bg-primary border-2 border-white/80 shadow-2xl shadow-secoundary relative cursor-pointer "
+>
+ 
+  
+    <AiOutlineMessage className="text-white  text-2xl absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]" />
+ 
+</motion.div>
+)}
+      
+
+       
     </div>
   );
 };

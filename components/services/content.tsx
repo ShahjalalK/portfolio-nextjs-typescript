@@ -52,7 +52,12 @@ const Content = ({title, Media, description, testiMonailSectionData}: Props) => 
             <button onClick={nextSlide} className="text-2xl bg-white rounded-full p-2 shadow-2xl shadow-primary/80 text-[#222] hover:text-secoundary transition-all duration-300 md:-mr-5"><AiOutlineRight /></button>
           </div>
       </div>
+      <div className="flex items-center flex-grow mb-5 md:w-[90%]">
+          <h1 className=" flex-grow text-xl">What people loved about this seller</h1>
+          <Link href="https://www.fiverr.com/shahjalalk" target="_blank" className="text-base cursor-pointer hover:underline">See all reviews</Link>
+        </div>
       <div className="my-5 md:w-[90%] relative border border-primary/20">
+        
       <ReviewClient testiMonailSectionData={testiMonailSectionData} />
       </div>
 

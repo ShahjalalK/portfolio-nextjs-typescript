@@ -5,10 +5,9 @@ import { gigMedia } from './gigMedia'
 
 import { HomeSectionSchema } from './home-section'
 import { portfolioSectionSchema } from './portfolio-section'
-import { pricingSchema } from './pricing'
 import { ServiceSectionSchema } from './service-section'
 import { frontEndSkillSectionSchema } from './skill-section'
 import { TestimonialSectionSchema } from './testimonial-section'
 import { BasicInfoSchema } from './basicInfo'
 
-export const schemaTypes = [BasicInfoSchema, HomeSectionSchema, AboutSectionSchema, TestimonialSectionSchema, frontEndSkillSectionSchema, ServiceSectionSchema, portfolioSectionSchema, servicePageSchema, gigMedia, pricingSchema]
+export const schemaTypes = [BasicInfoSchema, HomeSectionSchema, AboutSectionSchema, TestimonialSectionSchema, frontEndSkillSectionSchema, ServiceSectionSchema, portfolioSectionSchema, servicePageSchema, gigMedia]

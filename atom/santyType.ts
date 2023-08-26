@@ -66,8 +66,7 @@ export interface homeSectionType extends Base {
     hex : string
   }
 
-  export interface serviceSectionType extends Base {    
-    _type : "services",
+  export interface serviceSectionType extends Base { 
     serviceName: string,
     icon: string,
     ServicePath : string,
@@ -75,13 +74,13 @@ export interface homeSectionType extends Base {
     searchDescription : string,
     orderLenth : string ,
     serviceImage : string,
+    orderLink : string,
     servicePageName : servicePageNameType[]   
 
   }
 
   export interface servicePageNameType extends Base{
-    _type : "servicePage",
-    pricingName : pricingNameType[]
+    _type : "servicePage",   
     Gigs : GigsType[]
     description : any,
     serviceTitle : string
@@ -89,19 +88,7 @@ export interface homeSectionType extends Base {
   }
 
 
-  export interface pricingNameType extends Base{
-    _type : "image"
-    price : number,
-    delevery : number,
-    title : string,
-    save : number,
-    serviceInclude : string[],
-    contentBold : string,
-    content : string,
-    rivishion : boolean,
-    gigUrl : string
-    
-  }
+  
  
   
   export interface GigsType extends Base{
@@ -129,6 +116,27 @@ export interface homeSectionType extends Base {
   export const allServicState = atom<serviceSectionType[]>({
     key : "allServiceData",
     default : []
+  })
+
+
+  export interface serviceMessageType{
+   
+    serviceTitle : string,
+    searchDescription : string,   
+    serviceImage : string,
+    orderLink : string
+  }
+
+  const defaultServiceState : serviceMessageType = {    
+    serviceTitle : "",
+    searchDescription : "",   
+    serviceImage : "",
+    orderLink : ""
+  }
+
+  export const servicMessageState = atom<serviceMessageType>({
+    key : "servicMessageState",
+    default : defaultServiceState
   })
 
   export const basicInfoState = atom<basicInfoType[]>({

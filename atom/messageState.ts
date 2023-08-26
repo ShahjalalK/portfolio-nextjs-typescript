@@ -9,7 +9,11 @@ export interface messageType{
     message : string,
     media : string,
     id : string,
-    messageId : string
+    messageId : string,
+    serviceTitle : string,
+    searchDescription : string,   
+    serviceImage : string,
+    orderLink : string
     
 }
 
@@ -26,6 +30,22 @@ export interface messageContentType {
     media : File,
     previewImage : string
 }
+
+export interface messageOpenType{
+    open : boolean,
+    gigLink : boolean
+}
+
+const messageDefalutState : messageOpenType = {
+    open : false,
+    gigLink : false
+}
+
+export const messageOpenSate = atom<messageOpenType>({
+    key : "messageOpenSate",
+    default : messageDefalutState
+})
+
 
 
 export const allMessageState = atom<allMessageType[]>({

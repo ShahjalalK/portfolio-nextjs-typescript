@@ -10,7 +10,7 @@ import { GetServerSideProps, GetServerSidePropsContext, GetStaticPaths, GetStati
 import { fetchBasicInfoSection, fetchServiceSectionSection, fetchTestimonialSection } from '@/untils/fetchSanity'
 import { groq } from 'next-sanity'
 import { client } from '@/lib/sanity.client'
-import { allServicState, basicInfoState, basicInfoType, serviceSectionType, testimonialSectionType } from '@/atom/santyType'
+import { allServicState, basicInfoState, basicInfoType, servicMessageState, serviceMessageType, serviceSectionType, testimonialSectionType } from '@/atom/santyType'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import UserTrakingApi from '@/firebaseApi/userTrakingApi'
@@ -30,12 +30,16 @@ const ServiceId = ({BasicInfoData, service, allServiceData, slugId, testiMonailS
     const [user, loading, error] = useAuthState(auth);
     const [allService, setAllService] = useRecoilState<serviceSectionType[]>(allServicState)
     const [basicInfo, setBasicInfo] = useRecoilState<basicInfoType[]>(basicInfoState)
- 
+   
+
+
+
     useEffect(() => {
     setBasicInfo(
       BasicInfoData
     )
    }, [basicInfo])
+
    useEffect(() => {
     setAllService(
       allServiceData
@@ -63,11 +67,11 @@ useEffect(() => {
 
   return (
     <section className=" pt-20 font-Roboto">
-    <Meta title='Clickable email signature' /> 
+    <Meta title={service.serviceTitle} /> 
      <div className="grid container grid-cols-1 lg:grid-cols-3 gap-10">
       {/* <h1>MyId:-{slugId}</h1> */}
       <Content title={service.serviceTitle} Media={service.servicePageName[0].Gigs} description={service.servicePageName[0].description} testiMonailSectionData={testiMonailSectionData}/>
-      <Package pricingInfo={service.servicePageName[0].pricingName }  />
+      <Package service={service} />
       
       </div> 
       <hr className="text-primary/25" />
@@ -85,6 +89,7 @@ export const getServerSideProps : GetServerSideProps = async (context : GetServe
       *[_type == "services" && ServicePath.current == $slugId][0]{
       ...,
       servicePageName[]->{..., Gigs[]->{..., "mediaImage": mediaImage.asset->url}, pricingName[]->, serviceImage[]->},
+      "serviceImage" : serviceImage.asset->url
   
 }
  `

@@ -21,7 +21,7 @@ const SearchBar = (props: Props) => {
   return (
     <motion.div initial={{ x: 500, opacity : 0 }}
     animate={{ x: 0, opacity : 1 }}
-    transition={{ duration: 1, delay: 1.5, }} className=" hidden lg:flex flex-grow border border-white/30  rounded-md h-8 text-secoundary/60 relative  shadow-chackBoxBeforeShadow" >
+    transition={{ duration: 1, delay: 1.5, }} className=" hidden lg:flex flex-grow border border-white/30  rounded-md h-10 text-secoundary/60 relative  shadow-chackBoxBeforeShadow" >
         <label htmlFor='search' className="h-full px-1 flex items-center justify-center text-sm cursor-pointer" >
         <AiOutlineSearch className="text-2xl text-secoundary/60" />
         </label>

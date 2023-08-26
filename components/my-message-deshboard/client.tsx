@@ -8,6 +8,7 @@ import React, { useState } from 'react'
 import { MdDelete } from 'react-icons/md'
 import Moment from 'react-moment'
 import {motion} from 'framer-motion'
+import GigMessage from './gigMessage'
 
 type Props = {
   item : messageType,
@@ -56,10 +57,14 @@ const Client = ({item, id}: Props) => {
        <p className="text-xs"><span><Moment fromNow>{item.timestamp?.toDate()}</Moment></span> | <Link className="italic" href={`mailto:${item.email}`}>{item.email}</Link></p>
        </div>
     </div>
+    
+    <div>
+      {item.serviceTitle && <GigMessage item={item} />}
     <div className="flex flex-col space-y-1 bg-primary/10 border border-primary/50 ml-5 rounded-r-lg rounded-bl-lg p-2">
   <p className="rounded-md text-sm self-start ">{item.message}</p>
   {item.media && <Link href={item.media} target="_blank" download={true}><Image src={item.media} alt={item.name} width={550} height={550} className="w-32 h-auto" /></Link>}
   </div>
+    </div>
      
     
    </div>

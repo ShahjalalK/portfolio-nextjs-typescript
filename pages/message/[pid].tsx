@@ -163,7 +163,7 @@ useEffect(() => {
          {item.id === "cca5740a-6dd6-4fa9-b4da-6598ef9e49da" ? (
            <Me item={item} id={id} key={index} />
          ) : (
-           <Client item={item} id={id}  key={index} />
+          <Client item={item} id={id}  key={index} />
          )}
         
         </>
