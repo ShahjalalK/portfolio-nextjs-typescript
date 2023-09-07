@@ -15,8 +15,9 @@ module.exports = {
     },
     extend: { 
       fontFamily : {
+        Lobster: ['Lobster', 'cursive'],
         Noto: ['Noto Sans Mono', 'monospace'],
-        Roboto : ['Roboto', 'sans-serif']
+        Roboto : ['Mulish', 'sans-serif']
       },
       boxShadow : {
         "3xl" : "0 0 16px",

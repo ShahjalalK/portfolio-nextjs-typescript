@@ -118,7 +118,7 @@ const Navbar = (props: Props) => {
             height={100}
             className="w-10"
           />
-          <h3 className="uppercase text-white text-xl font-bold">
+          <h3 className="text-white text-3xl font-light tracking-[1px] font-Lobster">
             Shahjalal<span className="text-secoundary">K</span>
           </h3>
         </Link>

@@ -228,7 +228,40 @@
   @apply text-white/80 hover:text-white/90
  }
  
+.signatureDetails-inputBox{
+  @apply relative h-12 w-full rounded  flex items-center pl-3 pr-1
+}
 
+.signatureDetails-inputBox .borderDiv{
+  @apply absolute top-0 left-0 w-full h-full rounded border border-primary/20 pointer-events-none
+}
+
+.signatureDetails-inputBox input:focus ~ .borderDiv{
+ @apply border-secoundary
+}
+
+
+.signatureDetails-inputBox input{
+  @apply outline-none transition-all duration-150 text-sm w-full bg-[transparent]
+}
+
+.signatureDetails-inputBox label{
+@apply absolute left-3 text-base transition-all duration-150 cursor-auto text-info/60
+}
+.signatureDetails-inputBox input:valid,
+.signatureDetails-inputBox input:focus{
+  @apply translate-y-2
+}
+.signatureDetails-inputBox input:valid ~ label,
+.signatureDetails-inputBox input:focus ~ label{
+  @apply -translate-y-2 text-xs
+}
+.signatureDetails-inputBox input:focus ~ label{
+  @apply text-secoundary
+}
+.signatureTools::-webkit-scrollbar{
+  @apply hidden
+}
 }
 
 .skill-container .card .percent svg circle:nth-child(2){

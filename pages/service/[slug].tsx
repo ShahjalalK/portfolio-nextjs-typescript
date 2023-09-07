@@ -14,6 +14,7 @@ import { allServicState, basicInfoState, basicInfoType, servicMessageState, serv
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import UserTrakingApi from '@/firebaseApi/userTrakingApi'
+import SignatureTools from '@/components/signatureTools/signatureTools'
 
 type Props = {
   service : serviceSectionType,
@@ -66,9 +67,13 @@ useEffect(() => {
 }, [])
 
   return (
-    <section className=" pt-20 font-Roboto">
+    <section className=" font-Roboto">
     <Meta title={service.serviceTitle} /> 
-     <div className="grid container grid-cols-1 lg:grid-cols-3 gap-10">
+    <div className="mb-32 pt-14">
+      <SignatureTools />
+    </div>
+    <div className="pt-20">
+    <div className="grid container grid-cols-1 lg:grid-cols-3 gap-10">
       {/* <h1>MyId:-{slugId}</h1> */}
       <Content title={service.serviceTitle} Media={service.servicePageName[0].Gigs} description={service.servicePageName[0].description} testiMonailSectionData={testiMonailSectionData}/>
       <Package service={service} />
@@ -76,6 +81,7 @@ useEffect(() => {
       </div> 
       <hr className="text-primary/25" />
       <MoreServices slugId={slugId} />
+    </div>
   </section>
   )
 }
